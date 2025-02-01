@@ -23,7 +23,7 @@ export const authConfig: NextAuthConfig = {
                 if (!parsedCredentials.success) return null;
                 const { email, password } = parsedCredentials.data;
                 const { ok, user } = await authService.login({ email, password })
-          
+
                 if (!ok) return null;
 
                 return user;
@@ -32,22 +32,29 @@ export const authConfig: NextAuthConfig = {
     ],
     session: {
         strategy: 'jwt',
+        maxAge: 7200, // 2 horas (7200 segundos)
     },
     callbacks: {
-    
-        async jwt({ token, user, }) {
 
+        async jwt({ token, user }) {
             if (user) {
                 token.data = user;
-            };
+                token.accessToken = user.token as string; 
+                token.exp = Math.floor(Date.now() / 1000) + 7200; // Expira en 2 horas
+            }
 
             return token;
         },
-        async session({ session, token, }) {
+        async session({ session, token }) {
+            if (!token.exp || Date.now() / 1000 > token.exp) {
+                return session; 
+            }
 
             session.user = token.data as any;
+            session.accessToken = token.accessToken as string | undefined;
             return session;
         },
+
     },
 };
 
