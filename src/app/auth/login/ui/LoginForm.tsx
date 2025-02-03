@@ -23,8 +23,8 @@ export const LoginForm = () => {
         const { email, password } = data;
 
         // Server action
-        const resp = await login(email.toLowerCase(), password)
-        console.log({resp})
+        const resp = await login(email.toLowerCase(), password);
+  
         if (!resp.ok) {
           
             setErrorMessage(resp.message);

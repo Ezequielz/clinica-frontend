@@ -6,9 +6,9 @@ const API_URL = envs.API_URL;
 const login = async ({ email, password }: { email: string; password: string }) => {
     try {
         const response = await fetch(`${API_URL}/api/auth/login`, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email, password }),
         });
@@ -29,11 +29,11 @@ const login = async ({ email, password }: { email: string; password: string }) =
             user: data.user,
         };
     } catch (error) {
-        console.error("Error en la solicitud:", error);
+        console.error('Error en la solicitud:', error);
         return {
             ok: false,
             user: null,
-            message: "Error en la conexión con el servidor",
+            message: 'Error en la conexión con el servidor',
         };
     }
 };
@@ -41,9 +41,9 @@ const register = async ({ nombre, apellido, email, password }: RegisterUserProps
     
     try {
         const response = await fetch(`${API_URL}/api/auth/register`, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ nombre, apellido, email, password }),
         });
@@ -64,11 +64,11 @@ const register = async ({ nombre, apellido, email, password }: RegisterUserProps
             user: data.user,
         };
     } catch (error) {
-        console.error("Error en la solicitud:", error);
+        console.error('Error en la solicitud:', error);
         return {
             ok: false,
             user: null,
-            message: "Error en la conexión con el servidor",
+            message: 'Error en la conexión con el servidor',
         };
     }
 };
@@ -77,8 +77,8 @@ const register = async ({ nombre, apellido, email, password }: RegisterUserProps
 
 export const authService = {
 
-    //MEthods
+    //Methods
     login,
-    register
+    register,
 
 }

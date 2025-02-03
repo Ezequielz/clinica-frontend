@@ -30,9 +30,8 @@ export const RegisterForm = () => {
 
         // Server action
         const resp = await registerUser({nombre, apellido, email, password})
-        console.log({resp})
         if (!resp.ok) {
-            setErrorMessage(resp.message)
+            setErrorMessage(resp.message);
             return;
         };
 

@@ -1,6 +1,8 @@
-'use client'
+'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import envs from '../../../config/envs';
 
 interface Props {
     children: React.ReactNode;
@@ -9,10 +11,20 @@ interface Props {
 export const Providers = ({ children }: Props) => {
 
     return (
-        <SessionProvider >
 
-            {children}
+        <PayPalScriptProvider
+            options={{
+                clientId: envs.PAYPAL_CLIENT_ID ?? '',
+                intent: 'capture',
+                currency: 'USD',
+            }}
+        >
 
-        </SessionProvider>
+            <SessionProvider >
+
+                {children}
+
+            </SessionProvider>
+        </PayPalScriptProvider>
     );
 }

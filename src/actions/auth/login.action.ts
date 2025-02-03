@@ -1,7 +1,7 @@
 'use server';
 
-import { signIn } from '@/auth.config';
 import { AuthError } from 'next-auth';
+import { signIn } from '@/auth.config';
 
 export const login = async (email: string, password: string) => {
   try {
