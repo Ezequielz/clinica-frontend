@@ -35,7 +35,7 @@ export const Navbar = () => {
 
             {/* Mid Menu */}
             <div className="hidden sm:flex absolute left-1/2 -translate-x-1/2 text-purple-600">
-                <Link className="m-2 p-2 rounded-md transition-all hover:bg-purple-500 hover:text-slate-100" href="/servicios">Especialidades</Link>
+                <Link className="m-2 p-2 rounded-md transition-all hover:bg-purple-500 hover:text-slate-100" href="/servicios-medicos">Especialidades</Link>
                 <Link className="m-2 p-2 rounded-md transition-all hover:bg-purple-500 hover:text-slate-100" href="/paquetes">Paquetes</Link>
              
             </div>

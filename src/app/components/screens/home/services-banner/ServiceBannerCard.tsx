@@ -23,7 +23,7 @@ export const ServiceBannerCard = ({ servicio }: Props) => {
                 </div>
 
                 <Link
-                    href={`/service/${codigo_servicio}`}
+                    href={`/servicios-medicos/${codigo_servicio}`}
 
                     className="bg-purple-800 rounded-lg px-4 py-2 hover:bg-purple-500 text-slate-100 w-fit"
                 >
