@@ -1,11 +1,34 @@
-import { PaypalBtn } from '../components/payments/paypal/PaypalBtn';
-
+import { Suspense } from "react";
+import { ServicesBanner } from "../components/screens/home/services-banner/ServicesBanner";
+import { InfoBanner } from "../components/screens/home/info/InfoBanner";
+import { PaquetesBanner } from "../components/screens/home/paquetes/PaquetesBanner";
+import { ObraSocialBanner } from "../components/screens/home/obra-social/ObraSocial";
 
 export default function Home() {
   return (
-    <div>
+    <div className="relative w-full">
+      {/* TODO generar skeleton */}
+      <Suspense fallback={<div>Cargando...</div>} >
 
-    <PaypalBtn orderId="85ae51fd-be40-4690-b2cd-22eda0f04596" amount={90}/>
+        <ServicesBanner />
+      </Suspense>
+
+
+
+      <Suspense fallback={<div>Cargando...</div>}>
+
+        <PaquetesBanner />
+      </Suspense>
+
+      <ObraSocialBanner />
+
+      <Suspense fallback={<div>Cargando...</div>}>
+
+        <InfoBanner />
+      </Suspense>
+
+
+
 
     </div>
   );

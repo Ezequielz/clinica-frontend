@@ -1,4 +1,4 @@
- 
+
 'use client'
 
 import { useState } from 'react';
@@ -24,14 +24,14 @@ export const LoginForm = () => {
 
         // Server action
         const resp = await login(email.toLowerCase(), password);
-  
+
         if (!resp.ok) {
-          
+
             setErrorMessage(resp.message);
             return;
         };
 
-        
+
         window.location.replace('/');
 
     };
@@ -80,10 +80,14 @@ export const LoginForm = () => {
             <button
                 type='submit'
                 disabled={isSubmitting}
-                className={clsx({
-                    "btn-primary": !isSubmitting,
-                    "btn-disabled": isSubmitting
-                })}>
+
+                className={clsx(
+
+                    " w-full text-slate-100  rounded-lg px-4 py-2 m-auto",
+                    {
+                        "bg-purple-800 hover:bg-purple-500": !isSubmitting,
+                        "bg-slate-500": isSubmitting
+                    })}>
                 Ingresar
             </button>
 
