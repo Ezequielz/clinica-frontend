@@ -1,21 +1,32 @@
 
+import { Title } from '@/app/components/ui/Title';
+import { OrderById } from '@/app/components/screens/order/OrderById';
+import { Suspense } from 'react';
+
 interface Props {
-  params: Promise<{ id: string }>
-}
+  params: Promise<{ id: string }>;
+};
 
 export default async function OrderScreen({ params }: Props) {
 
   const { id } = await params;
 
-//   const { ok, paquete } = await readPaqueteByCode(codigo_paquete);
-
-
-
   return (
 
-    <div className="py-10">
-        order screen {id}
-      
+    <div className="flex justify-center items-center mb-72 px-20 ">
+
+      <div className="flex flex-col w-full">
+
+        <Title title={`Orden #${id.split('-').at(-1)}`} />
+
+
+        <Suspense  fallback={ <div>Cargando...</div> } >
+
+          <OrderById id={id} />
+        </Suspense>
+
+      </div>
     </div>
+
   );
 }
