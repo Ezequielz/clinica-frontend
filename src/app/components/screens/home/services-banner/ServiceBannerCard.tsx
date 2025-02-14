@@ -1,22 +1,24 @@
 import { ServicioMedico } from "@/app/interfaces/services-medical"
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
+import { Title } from "@/app/components/ui/Title";
 
 interface Props {
     servicio: ServicioMedico;
 }
 export const ServiceBannerCard = ({ servicio }: Props) => {
     const { imagen, nombre, descripcion, codigo_servicio } = servicio;
+    const viewTransitionName = servicio!.nombre.trim().replaceAll(' ', '-');
     return (
         <article className="flex pb-2 h-[450px]">
 
             <div className="w-1/2 flex flex-col justify-center  gap-4 py-5 px-20
              bg-[url(https://res.cloudinary.com/zapataezequiel/image/upload/v1738868872/clinica/dots_p3tvrs.webp)] bg-contain bg-no-repeat bg-bottom
             ">
-         
-                <div className="text-6xl font-bold text-cyan-500 text-balance ">
+                <Title title={servicio.nombre} className="text-6xl"  />
+                {/* <div className="text-6xl font-bold text-cyan-500 text-balance ">
                     {nombre}
-                </div>
+                </div> */}
 
                 <div className="font-medium text-balance text-cyan-900 px-0.5">
                     {descripcion}
@@ -40,6 +42,8 @@ export const ServiceBannerCard = ({ servicio }: Props) => {
                 width={500}
                 height={500}
                 className="w-1/2 object-cover"
+                unoptimized
+                style={{viewTransitionName}}
             />
 
 

@@ -37,7 +37,7 @@ const readServiceMedicalByCode = async (code: string) => {
     try {
         const response = await fetch(`${API_URL}/api/medical-services/${code}`);
         const data : ServicesMedicalResponse = await response.json();
-
+     
         if (!data.ok) {
             return {
                 ok:false,

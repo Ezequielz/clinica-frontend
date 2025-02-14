@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clinica",
-  description: "Clinica - Servicios medicos",
+  title: "TodoClinica",
+  description: "Clínica - Servicios medicos",
 };
 
 export default function RootLayout({

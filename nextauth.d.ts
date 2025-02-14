@@ -13,6 +13,10 @@ declare module "next-auth" {
         email: string;
         rol: string;
         image?: string;
+        paciente: {
+            id_paciente: string;
+            obra_social: boolean;
+        };
     }
 
     interface Session extends DefaultSession {

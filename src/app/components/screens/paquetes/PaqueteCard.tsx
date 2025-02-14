@@ -1,16 +1,14 @@
 'use client';
 
-
 import Image from 'next/image';
 import { Link } from 'next-view-transitions'
 import { motion } from 'framer-motion';
-import { type ServicioMedico } from '@/app/interfaces/services-medical';
-
+import type { Paquete } from '@/app/interfaces/paquetes';
 
 interface Props {
-    servicio: ServicioMedico,
+    paquete: Paquete;
     index: number;
-}
+};
 const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: (index: number) => ({
@@ -19,14 +17,12 @@ const cardVariants = {
         transition: { duration: 0.6, delay: index * 0.05 } // Delay dinámico
     })
 };
+export const PaqueteCard = ({ paquete, index }: Props) => {
 
-export const ServiceMedicalCard = ({ index, servicio }: Props) => {
-
-    const viewTransitionName = servicio.nombre.trim().replaceAll(' ', '-');
+    const viewTransitionName = paquete.nombre.trim().replaceAll(' ', '-');
     return (
-
         <motion.article
-            key={servicio.id}
+            key={paquete.codigo_paquete}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -34,14 +30,14 @@ export const ServiceMedicalCard = ({ index, servicio }: Props) => {
             custom={index}
             className="h-full"
         >
-            <Link 
-            href={`/servicios-medicos/${servicio.codigo_servicio}`}
-             className="block h-full">
+            <Link
+                href={`/paquetes/${paquete.codigo_paquete}`}
+                className="block h-full">
                 <div className="bg-white p-4 shadow-lg rounded-lg h-full flex flex-col">
                     {/* Imagen con altura fija y tamaño uniforme */}
                     <Image
-                        src={servicio.imagen ?? ''}
-                        alt={`Imagen del servicio ${servicio.nombre}`}
+                        src={paquete.imagen ?? 'https://res.cloudinary.com/zapataezequiel/image/upload/v1738967258/default-image-not-found.webp'}
+                        alt={`Imagen del paquete ${paquete.codigo_paquete}`}
                         height={200}
                         width={500}
                         unoptimized
@@ -51,14 +47,22 @@ export const ServiceMedicalCard = ({ index, servicio }: Props) => {
 
                     {/* Contenido con flex-grow para ocupar todo el espacio */}
                     <div className="flex-grow flex flex-col justify-between p-4
-                    
-                    ">
-                        <h3 className="text-xl font-bold text-cyan-500">{servicio.nombre}</h3>
-                        <p className="text-sm text-gray-600">{servicio.descripcion.slice(0, 60)+ '... ' } <span className='text-purple-600 hover:text-opacity-70'>Saber más</span> </p>
+            
+            ">
+                        <h3 className="text-xl font-bold text-cyan-500">{paquete.nombre}</h3>
+                        <ul>
+                            {
+                                paquete.servicios_incluidos.map((servicio, index) => (
+
+                                    <li key={servicio.servicio.nombre + index}>
+                                        {servicio.servicio.nombre}
+                                    </li>
+                                ))
+                            }
+                        </ul>
                     </div>
                 </div>
             </Link>
         </motion.article>
-    );
-
+    )
 }

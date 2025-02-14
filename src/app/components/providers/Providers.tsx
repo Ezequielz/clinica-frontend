@@ -2,6 +2,8 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { ViewTransitions } from 'next-view-transitions';
+
 import envs from '../../../config/envs';
 
 interface Props {
@@ -21,8 +23,12 @@ export const Providers = ({ children }: Props) => {
         >
 
             <SessionProvider >
+                <ViewTransitions>
 
-                {children}
+
+                    {children}
+                </ViewTransitions>
+
 
             </SessionProvider>
         </PayPalScriptProvider>

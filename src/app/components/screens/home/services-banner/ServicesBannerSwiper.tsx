@@ -2,7 +2,7 @@
 'use client'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -22,7 +22,7 @@ export const ServicesBannerSwiper = ({ servicesMedical }: Props) => {
 
         <Swiper
             // install Swiper modules
-            modules={[ Pagination, Scrollbar, A11y]}
+            modules={[ Autoplay,Pagination, Scrollbar, A11y]}
             spaceBetween={50}
             slidesPerView={1}
             // navigation
@@ -30,6 +30,10 @@ export const ServicesBannerSwiper = ({ servicesMedical }: Props) => {
             scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log('slide change')}
+            autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
         >
 
             {

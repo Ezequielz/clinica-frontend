@@ -50,7 +50,7 @@ export const Footer = () => {
 
 
             <div className="text-center text-sm text-gray-400  py-6">
-                <p>&copy; 2024 TodoClínica. Todos los derechos reservados.</p>
+                <p>&copy; 2025 TodoClínica. Todos los derechos reservados.</p>
             </div>
         </footer>
 
