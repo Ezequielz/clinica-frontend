@@ -1,4 +1,5 @@
 
+import { DeleteOrderResponse } from '@/app/interfaces/delete-order';
 import envs from '../config/envs';
 import type { OrderByIDResponse } from '@/app/interfaces/orderById';
 
@@ -76,10 +77,42 @@ const update = async ({ orderId, pagado, transactionId }: UpdateOrder , token: s
     }
 };
 
+const deleteOrderById = async (orderId: string, token: string) => {
+    try {
+        const response = await fetch(`${API_URL}/api/orders/${orderId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        const data: DeleteOrderResponse = await response.json();
+
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            order: data.order,
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+}
+
 
 export const orderService = {
 
     //Methods
     update,
     readById,
+    deleteOrderById,
 };

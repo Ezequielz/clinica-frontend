@@ -1,24 +1,25 @@
 'use server';
 
+import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth.config';
 import { orderService } from '@/services/orders.service';
-import { redirect } from 'next/navigation';
 
-// 15879626-0827-43b0-8214-25b559fb847a
-export const readOrderById = async (orderId: string) => {
+
+export const deleteOrderById = async (orderId: string) => {
     const session = await auth();
     const userId = session?.user?.id;
-
+    //asdsa
     // Verificar session usuario
     if (!userId) {
-        redirect(`/auth/login`)
+        redirect(`/auth/login`);
     };
     const token = session!.user.token;
 
     try {
 
-        const { ok, message, order } = await orderService.readById(orderId, token);
-      
+        const { ok, message, order } = await orderService.deleteOrderById(orderId, token);
+
         if (!ok) {
             return {
                 ok: false,
@@ -26,6 +27,8 @@ export const readOrderById = async (orderId: string) => {
             };
         };
 
+
+        revalidatePath('/consultas');
 
         return {
             ok: true,

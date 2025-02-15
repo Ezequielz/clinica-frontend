@@ -1,24 +1,26 @@
+
+
 'use server';
 
 import { auth } from '@/auth.config';
-import { orderService } from '@/services/orders.service';
+import { consultasService } from '@/services/consultas.service';
 import { redirect } from 'next/navigation';
 
 // 15879626-0827-43b0-8214-25b559fb847a
-export const readOrderById = async (orderId: string) => {
+export const readConsultasByPaciente = async () => {
     const session = await auth();
     const userId = session?.user?.id;
 
     // Verificar session usuario
     if (!userId) {
-        redirect(`/auth/login`)
+        redirect(`/auth/login`);
     };
     const token = session!.user.token;
-
+    const pacienteId = session.user.paciente.id_paciente
     try {
-
-        const { ok, message, order } = await orderService.readById(orderId, token);
-      
+        
+        const { ok, message, consultas } = await consultasService.readConsultasByPaciente(pacienteId, token);
+     
         if (!ok) {
             return {
                 ok: false,
@@ -26,10 +28,9 @@ export const readOrderById = async (orderId: string) => {
             };
         };
 
-
         return {
             ok: true,
-            order,
+            consultas,
         };
 
     } catch (error) {

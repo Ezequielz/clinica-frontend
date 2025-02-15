@@ -3,6 +3,8 @@ import envs from '../config/envs';
 import { formatDate } from '@/helpers/FormatDate';
 import type { ConsultasPaqueteResponse } from '@/app/interfaces/consultas-pack';
 import type { CreateConsultasPack } from '@/actions/consultas/createConsultasPack.action';
+import type { ConsultasByPacienteResponse } from '@/app/interfaces/consultasByPaciente';
+import { DeleteConsultaResponse } from '@/app/interfaces/delete-consulta';
 
 const API_URL = envs.API_URL;
 
@@ -20,12 +22,12 @@ const createConsulta = async (
             medicoId: string;
             token: string;
         }) => {
-            // const fechaFormateada = fecha_consulta.split("-").reverse().join("-");
+    // const fechaFormateada = fecha_consulta.split("-").reverse().join("-");
 
-           
+
     try {
         const response = await fetch(`${API_URL}/api/consultas`, {
-            method: "POST", 
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
@@ -40,7 +42,7 @@ const createConsulta = async (
         });
 
         const data: ConsultasResponse = await response.json();
-  
+
 
         if (!data.ok) {
             return {
@@ -63,10 +65,10 @@ const createConsulta = async (
     }
 };
 const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: CreateConsultasPack, token: string) => {
-               
+
     try {
         const response = await fetch(`${API_URL}/api/consultas/${paqueteCode}`, {
-            method: "POST", 
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
@@ -78,7 +80,7 @@ const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: 
         });
 
         const data: ConsultasPaqueteResponse = await response.json();
-  
+
 
         if (!data.ok) {
             return {
@@ -101,10 +103,74 @@ const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: 
     }
 };
 
+const readConsultasByPaciente = async (pacienteId: string, token: string) => {
+
+    try {
+        const response = await fetch(`${API_URL}/api/consultas/${pacienteId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        const data: ConsultasByPacienteResponse = await response.json();
+
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            consultas: data.consulta,
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+}
+
+const deleteConsultaById = async (consultaId: string, token: string) => {
+    try {
+        const response = await fetch(`${API_URL}/api/consultas/${consultaId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        const data: DeleteConsultaResponse = await response.json();
+
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            consulta: data.consulta,
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+}
+
 export const consultasService = {
 
     //Methods
     createConsulta,
-    createConsultasPack
-
+    createConsultasPack,
+    readConsultasByPaciente,
+    deleteConsultaById,
 };
