@@ -1,6 +1,6 @@
 import { UserRol } from "./user";
 
-export interface ConsultasByPacienteResponse {
+export interface ConsultasByUserResponse {
     ok: boolean;
     consulta: Consulta[];
     error?: string;

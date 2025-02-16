@@ -14,12 +14,11 @@ interface Servicio {
 
 export interface CreateConsultasPack {
     paqueteCode: string;
-    pacienteId: string;
     paqueteDetails: Servicio[]
 };
 
 
-export const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: CreateConsultasPack) => {
+export const createConsultasPack = async ({ paqueteDetails, paqueteCode }: CreateConsultasPack) => {
 
 
     const session = await auth();
@@ -39,10 +38,12 @@ export const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteC
     try {
 
         const { ok, consultas, message, order } = await consultasService.createConsultasPack({
-            pacienteId,
             paqueteDetails,
             paqueteCode
-        }, token)
+        },
+            userId,
+            token,
+        );
 
 
         if (!ok) {

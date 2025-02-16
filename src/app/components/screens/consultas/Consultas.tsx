@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import { readConsultasByPaciente } from '@/actions/consultas/readConsultasByPaciente.action'
+import { readConsultasByUser } from '@/actions/consultas/readConsultasByUser.action'
 import { formatDate } from '@/helpers/FormatDate';
 import { DeleteOrderButton } from './DeleteOrderButton';
 
 export const Consultas = async () => {
 
-    const { ok, consultas, message } = await readConsultasByPaciente();
-
+    const { ok, consultas, message } = await readConsultasByUser();
+    console.log(message)
     if (!ok || !consultas) {
         return (
             <div>
-                {message}
+                No tienes consultas registradas
             </div>
         )
     }

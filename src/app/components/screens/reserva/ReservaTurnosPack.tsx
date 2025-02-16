@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { ReservationForm } from './form/ReservationForm';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
 import { ReservationSummary } from './summary/ReservationSummary';
@@ -23,7 +22,7 @@ interface ServiceDetails {
 }
 
 export const ReservaTurnosPack = ({ paquete }: Props) => {
-    const session = useSession();
+ 
     const { servicios_incluidos } = paquete;
     const [isMounted, setIsMounted] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,11 +35,10 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
 
     useEffect(() => {
         if (!isPaqueteCompleted) return;
-        if (!session.data?.user.paciente.id_paciente) return;
+       
         setLoading(true)
         const paqueteToSave = {
             paqueteCode: paquete.codigo_paquete,
-            pacienteId: session.data?.user.paciente.id_paciente,
             paqueteDetails,
         }
        

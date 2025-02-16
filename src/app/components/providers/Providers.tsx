@@ -5,6 +5,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { ViewTransitions } from 'next-view-transitions';
 
 import envs from '../../../config/envs';
+import { SnackbarProvider } from 'notistack';
 
 interface Props {
     children: React.ReactNode;
@@ -24,9 +25,11 @@ export const Providers = ({ children }: Props) => {
 
             <SessionProvider >
                 <ViewTransitions>
+                    <SnackbarProvider>
 
+                        {children}
+                    </SnackbarProvider>
 
-                    {children}
                 </ViewTransitions>
 
 

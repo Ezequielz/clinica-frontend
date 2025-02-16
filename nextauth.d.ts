@@ -8,11 +8,11 @@ declare module "next-auth" {
         telefono: string;
         direccion: string;
         dni: string;
-        fecha_nac: string;
+        fecha_nac: Date;
         token: string; 
         email: string;
         rol: string;
-        image?: string;
+        imagen?: string;
         paciente: {
             id_paciente: string;
             obra_social: boolean;

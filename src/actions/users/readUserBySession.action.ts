@@ -1,26 +1,23 @@
-
-
 'use server';
 
 import { auth } from '@/auth.config';
-import { consultasService } from '@/services/consultas.service';
+import { usersService } from '@/services/users.service';
 import { redirect } from 'next/navigation';
 
-// 15879626-0827-43b0-8214-25b559fb847a
-export const readConsultasByPaciente = async () => {
+export const readUserBySession = async () => {
     const session = await auth();
     const userId = session?.user?.id;
 
     // Verificar session usuario
     if (!userId) {
-        redirect(`/auth/login`);
+        redirect(`/auth/login`)
     };
     const token = session!.user.token;
-    const pacienteId = session.user.paciente.id_paciente
+
     try {
-        
-        const { ok, message, consultas } = await consultasService.readConsultasByPaciente(pacienteId, token);
-     
+
+        const { ok, message, user } = await usersService.readUserBySession(userId, token);
+      
         if (!ok) {
             return {
                 ok: false,
@@ -28,9 +25,10 @@ export const readConsultasByPaciente = async () => {
             };
         };
 
+
         return {
             ok: true,
-            consultas,
+            user,
         };
 
     } catch (error) {

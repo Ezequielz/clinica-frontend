@@ -1,47 +1,26 @@
+
+
 'use server';
 
 import { auth } from '@/auth.config';
 import { consultasService } from '@/services/consultas.service';
+import { redirect } from 'next/navigation';
 
-interface CreateConsulta {
-    servicioId: string;
-    fecha_consulta: string;
-    hora_consulta: string;
-    medicoId: string;
-};
-
-
-export const createConsulta = async ({ servicioId,
-    fecha_consulta,
-    hora_consulta,
-    medicoId,
-}: CreateConsulta) => {
-
-
+// 15879626-0827-43b0-8214-25b559fb847a
+export const readConsultasByUser = async () => {
     const session = await auth();
     const userId = session?.user?.id;
 
     // Verificar session usuario
     if (!userId) {
-        return {
-            ok: false,
-            message: 'No hay sessión de usuario',
-        };
+        redirect(`/auth/login`);
     };
     const token = session!.user.token;
     
-
     try {
+        
+        const { ok, message, consultas } = await consultasService.readConsultasByUser(userId, token);
 
-        const { ok, consulta, turnoReservado, message } = await consultasService.createConsulta({
-            servicioId,
-            fecha_consulta,
-            hora_consulta,
-            userId,
-            medicoId,
-            token
-        });
-     
         if (!ok) {
             return {
                 ok: false,
@@ -49,11 +28,9 @@ export const createConsulta = async ({ servicioId,
             };
         };
 
-
         return {
             ok: true,
-            consulta,
-            turnoReservado,
+            consultas,
         };
 
     } catch (error) {

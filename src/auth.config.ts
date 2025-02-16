@@ -23,7 +23,7 @@ export const authConfig: NextAuthConfig = {
                 if (!parsedCredentials.success) return null;
                 const { email, password } = parsedCredentials.data;
                 const { ok, user } = await authService.login({ email, password })
-
+                
                 if (!ok) return null;
 
                 return user;
@@ -36,24 +36,38 @@ export const authConfig: NextAuthConfig = {
     },
     callbacks: {
 
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger, session }) {
+         
+            // Si el usuario acaba de iniciar sesión, asignar los valores
             if (user) {
-                token.data = user;
-                token.accessToken = user.token as string; 
+                token.data = user || {}; // Asegurar que siempre sea un objeto
+                token.accessToken = user.token as string;
                 token.exp = Math.floor(Date.now() / 1000) + 7200; // Expira en 2 horas
             }
-
+      
+            // Si se ejecuta update(), actualizar los datos del usuario sin perder el accessToken
+            if (trigger === "update") {               
+                token.data = { ...(token.data || {}), ...(session.user || {}) };
+                token.accessToken = token.accessToken || session.accessToken;
+                token.exp = Math.floor(Date.now() / 1000) + 7200;
+            }
+        
             return token;
         },
+        
         async session({ session, token }) {
+     
             if (!token.exp || Date.now() / 1000 > token.exp) {
-                return session; 
+                // Limpiar sesión si el token ha expirado
+                return { user: undefined, accessToken: undefined } as any;
             }
-
+        
             session.user = token.data as any;
             session.accessToken = token.accessToken as string | undefined;
             return session;
-        },
+        }
+  
+        
 
     },
 };

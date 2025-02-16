@@ -3,8 +3,8 @@ import envs from '../config/envs';
 import { formatDate } from '@/helpers/FormatDate';
 import type { ConsultasPaqueteResponse } from '@/app/interfaces/consultas-pack';
 import type { CreateConsultasPack } from '@/actions/consultas/createConsultasPack.action';
-import type { ConsultasByPacienteResponse } from '@/app/interfaces/consultasByPaciente';
 import { DeleteConsultaResponse } from '@/app/interfaces/delete-consulta';
+import { ConsultasByUserResponse } from '@/app/interfaces/consultasByPaciente';
 
 const API_URL = envs.API_URL;
 
@@ -12,13 +12,13 @@ const createConsulta = async (
     { servicioId,
         fecha_consulta,
         hora_consulta,
-        pacienteId,
+        userId,
         medicoId,
         token }: {
             servicioId: string;
             fecha_consulta: string;
             hora_consulta: string;
-            pacienteId: string;
+            userId: string;
             medicoId: string;
             token: string;
         }) => {
@@ -36,7 +36,7 @@ const createConsulta = async (
                 servicioId,
                 fecha_consulta: formatDate.reverse(fecha_consulta),
                 hora_consulta,
-                pacienteId,
+                userId,
                 medicoId,
             })
         });
@@ -64,7 +64,7 @@ const createConsulta = async (
         };
     }
 };
-const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: CreateConsultasPack, token: string) => {
+const createConsultasPack = async ({ paqueteDetails, paqueteCode }: CreateConsultasPack, userId: string, token: string) => {
 
     try {
         const response = await fetch(`${API_URL}/api/consultas/${paqueteCode}`, {
@@ -74,7 +74,7 @@ const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: 
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({
-                pacienteId,
+                userId,
                 paqueteDetails
             })
         });
@@ -103,18 +103,19 @@ const createConsultasPack = async ({ pacienteId, paqueteDetails, paqueteCode }: 
     }
 };
 
-const readConsultasByPaciente = async (pacienteId: string, token: string) => {
+const readConsultasByUser = async (consultaId: string, token: string) => {
 
     try {
-        const response = await fetch(`${API_URL}/api/consultas/${pacienteId}`, {
+        const response = await fetch(`${API_URL}/api/consultas/${consultaId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
         });
-        const data: ConsultasByPacienteResponse = await response.json();
-
+        console.log({ response })
+        const data: ConsultasByUserResponse = await response.json();
+        console.log({ data })
         if (data.error) {
             return {
                 ok: false,
@@ -171,6 +172,6 @@ export const consultasService = {
     //Methods
     createConsulta,
     createConsultasPack,
-    readConsultasByPaciente,
+    readConsultasByUser,
     deleteConsultaById,
 };

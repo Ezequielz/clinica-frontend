@@ -1,10 +1,10 @@
-export interface LoginResponse {
+export interface UserBySessionResponse {
     ok:   boolean;
     user: User;
-    msg?: string;
+    error: string;
 }
 
-interface User {
+ interface User {
     id:        string;
     nombre:    string;
     apellido:  string;
@@ -13,15 +13,18 @@ interface User {
     email:     string;
     telefono:  string;
     direccion: string;
-    imagen:    null;
+    imagen?:    string;
     rol:       string;
     createdAt: Date;
     updatedAt: Date;
+    medico:    null;
     paciente:  Paciente;
-    token:     string;
 }
 
-interface Paciente {
+ interface Paciente {
     id_paciente: string;
     obra_social: boolean;
+    createdAt:   Date;
+    updatedAt:   Date;
+    userId:      string;
 }
