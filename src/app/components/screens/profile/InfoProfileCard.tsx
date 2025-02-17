@@ -14,7 +14,6 @@ export const InfoProfileCard = () => {
     }
 
     const { user } = data;
-    console.log({user})
 
     return (
         <div className="flex justify-center m-auto shadow-lg rounded-lg w-full max-w-xl ">
