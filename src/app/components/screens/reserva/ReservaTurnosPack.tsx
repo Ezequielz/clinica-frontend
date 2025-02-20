@@ -9,6 +9,8 @@ import { ReservationSummary } from './summary/ReservationSummary';
 import { formatDate } from '@/helpers/FormatDate';
 import { createConsultasPack } from '@/actions/consultas/createConsultasPack.action';
 import type { PaqueteById } from '@/app/interfaces/paquete';
+import { ButtonLoading } from '../../ui/buttons/ButtonLoading';
+import { ButtonAnimated } from '../../ui/buttons/ButtonAnimated';
 
 interface Props {
     paquete: PaqueteById
@@ -22,26 +24,38 @@ interface ServiceDetails {
 }
 
 export const ReservaTurnosPack = ({ paquete }: Props) => {
- 
+
     const { servicios_incluidos } = paquete;
     const [isMounted, setIsMounted] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [paqueteDetails, setPaqueteDetails] = useState<ServiceDetails[]>([])
     const [isPaqueteCompleted, setIsPaqueteCompleted] = useState(false)
-    const { selectedMedico, selectedDate, selectedHorario, removeMedico } = useReservaTurnos();
+    const {
+        selectedMedico, selectedDate, selectedHorario,
+        setSelectedMedico,
+        setSelectedDate,
+        setSelectedHorario,
+        removeMedico } = useReservaTurnos();
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const isServiceDetailsCompleted = selectedMedico?.id_medico && selectedDate && selectedHorario;
 
     useEffect(() => {
+
+        setSelectedMedico(null)
+        setSelectedDate(null)
+        setSelectedHorario(null)
+    }, []);
+
+    useEffect(() => {
         if (!isPaqueteCompleted) return;
-       
+
         setLoading(true)
         const paqueteToSave = {
             paqueteCode: paquete.codigo_paquete,
             paqueteDetails,
         }
-       
+
         createConsultasPack(paqueteToSave)
             .then(res => {
                 if (!res.ok) {
@@ -61,6 +75,7 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
     if (!isMounted) return null;
 
     const handleNext = async (servicioId: string) => {
+        if (!servicioId) return;
         // Verifica si se ha completado la selección de médico, fecha y horario
         if (selectedMedico && selectedDate && selectedHorario) {
             // Reiniciamos los valores del estado para el siguiente servicio
@@ -87,6 +102,13 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
 
         }
     };
+    if (loading) {
+        return (
+            <div className='flex flex-col items-center  min-h-screen'>
+                <ButtonLoading label='Creando orden, espere...' />
+            </div>
+        )
+    }
 
 
     return (
@@ -101,11 +123,7 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
                     </span>
                 ))}
             </div>
-            {
-                loading && (
-                    <div className='bg-purple-600 px-4 py-2 animate-pulse rounded-lg text-white'>Creando orden, espere...</div>
-                )
-            }
+
 
             {
                 error && (
@@ -113,48 +131,41 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
 
                 )
             }
-            <div className='flex w-full px-20 gap-2'>
-                {!isPaqueteCompleted && (
-                    <>
 
-                        {servicios_incluidos.map((pack, index) => (
-                            <div key={pack.servicioId} className={index === currentIndex ? 'w-1/2  block' : 'hidden'}>
-                                <ReservationForm servicioMedico={pack.servicio} />
+            {!isPaqueteCompleted && (
+                <>
 
-                                {
-                                    isServiceDetailsCompleted && (
-                                        <>
-                                            <ReservationSummary />
-                                            {index === currentIndex && (
-                                                <button
-                                                    onClick={() => handleNext(pack.servicioId)}
-                                                    className="mt-4 p-2 bg-purple-700 hover:bg-purple-500 text-white rounded-lg"
-                                                    disabled={!(selectedMedico && selectedDate && selectedHorario)}
-                                                >
-                                                    Confirmar la reserva para {pack.servicio.nombre}
-                                                </button>
-                                            )}
-                                        </>
-                                    )
-                                }
+                    {servicios_incluidos.map((pack, index) => (
+                        <div key={pack.servicioId} className={index === currentIndex ? 'w-full flex px-20 gap-2' : 'hidden'}>
+                            <ReservationForm servicioMedico={pack.servicio} />
 
-                            </div>
-                        ))}
-                    </>
+                            {
+                                isServiceDetailsCompleted && (
+                                    <div className='flex flex-col w-full '>
+                                        <ReservationSummary />
+                                        {index === currentIndex && (
+                                            <div className='flex justify-center w-full'>
+                                                <ButtonAnimated
+                                                    label={`Confirmar la reserva para ${pack.servicio.nombre}`}
+                                                    param={pack.servicioId}
+                                                    onClick={handleNext}
+                                                />
+                                            </div>
 
-                )}
+                                        )}
+                                    </div>
+                                )
+                            }
 
-                {
-                    !isServiceDetailsCompleted && (
+                            {!isServiceDetailsCompleted && (<ReservationSummary />)}
 
-                        <div className='w-1/2'>
-
-                            <ReservationSummary />
                         </div>
-                    )
-                }
+                    ))}
+                </>
 
-            </div>
+            )}
+
+
         </div>
     );
 };

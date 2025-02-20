@@ -1,10 +1,12 @@
 
-import { IoCardOutline, IoPersonOutline } from "react-icons/io5"
-import { MdDashboardCustomize } from "react-icons/md"
-import { MdOutlineLocalHospital } from "react-icons/md";
-import { TbListDetails } from "react-icons/tb";
-import { AdminMenuList } from "./AdminMenuList";
-import { Logo } from "../ui/Logo";
+import { IoCardOutline, IoPersonOutline } from 'react-icons/io5'
+import { MdDashboardCustomize } from 'react-icons/md'
+import { MdOutlineLocalHospital } from 'react-icons/md';
+import { TbListDetails } from 'react-icons/tb';
+import { FaFileMedical } from 'react-icons/fa';
+import { AdminMenuList } from './AdminMenuList';
+import { Logo } from '../ui/Logo';
+import { FaArrowTrendUp } from 'react-icons/fa6';
 
 
 const menu = [
@@ -36,6 +38,16 @@ const menu = [
         href: '/admin/paquetes',
         icon: <TbListDetails size={30} />,
         label: 'Paquetes',
+    },
+    {
+        href: '/admin/consultas',
+        icon: <FaFileMedical size={30} />,
+        label: 'Consultas',
+    },
+    {
+        href: '/admin/ganancias',
+        icon: <FaArrowTrendUp size={30} />,
+        label: 'Ganancias',
     },
 
 ]

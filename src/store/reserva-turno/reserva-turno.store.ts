@@ -17,7 +17,7 @@ interface State {
     selectedHorario?: string | null;
     selectedDate?: Date | null;
     selectedMedico?: Medico | null;
-  
+    isLoading: boolean;
 
 
     // Methods
@@ -26,6 +26,7 @@ interface State {
     setSelectedMedico: (medico: Medico | null) => void;
     setSelectedDate: (date: Date | null) => void;
     setSelectedHorario: (horario: string | null) => void;
+    setIsLoading: ( loading: boolean ) => void;
 
 };
 
@@ -36,6 +37,7 @@ export const useReservaTurnoStore = create<State>()((set) => ({
     selectedMedico: undefined,
     selectedDate: undefined,
     selectedHorario: undefined,
+    isLoading: false,
 
     // Methods
     setSelectedMedico: (medico) => set({ selectedMedico: medico }),
@@ -43,6 +45,7 @@ export const useReservaTurnoStore = create<State>()((set) => ({
     setSelectedHorario: (horario) => set({ selectedHorario: horario }),
     setHorarios: (horarios) => set({ horarios: horarios }),
     setAvailableDays: (dias) => set({ availableDays: dias }),
+    setIsLoading: ( loading ) => set({ isLoading: loading }),
 
 
 }));

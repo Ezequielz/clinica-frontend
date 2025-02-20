@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Title } from '../../ui/Title';
 import { type ServicioMedico } from '@/app/interfaces/services-medical';
 import Link from 'next/link';
+import { ButtonDefault } from '../../ui/buttons/ButtonDefault';
 
 interface Props {
   servicioMedico: ServicioMedico;
@@ -75,10 +76,8 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
 
             <Link
               href={`/reserva/servicio/${codigoServicio}`}
-              className='bg-purple-800 block mt-2 rounded-lg px-4 py-2 hover:bg-purple-500 text-slate-100 w-fit '
             >
-
-              Reservar turno
+              <ButtonDefault label='Reservar turno' />
             </Link>
           </div>
 

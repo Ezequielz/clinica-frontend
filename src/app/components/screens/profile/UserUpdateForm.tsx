@@ -11,13 +11,15 @@ import { updateUser } from '@/actions/users/updateUser.action';
 import clsx from 'clsx';
 import { useState } from 'react';
 import Image from 'next/image';
+import { ButtonAnimated } from '../../ui/buttons/ButtonAnimated';
+import { ButtonLoading } from '../../ui/buttons/ButtonLoading';
 
 
 export interface UserUpdate extends Partial<Omit<User, 'email' | 'imagen'>> {
     id: string;
     paciente?: { id_paciente: string; obra_social: boolean };
     password?: string;
-    imagen: string | File;
+    imagen?: string | File;
 };
 
 
@@ -82,7 +84,7 @@ export const UserUpdateForm = () => {
             enqueueSnackbar('Usuario actualizado', { variant: 'success' });
 
 
-           const updateSession = await update({
+            const updateSession = await update({
                 ...session,
                 user: {
                     ...updatedData,
@@ -90,7 +92,7 @@ export const UserUpdateForm = () => {
                 },
             });
 
-            console.log({updateSession})
+            console.log({ updateSession })
             closeModal();
         } else {
             enqueueSnackbar(message, { variant: 'error' });
@@ -158,28 +160,15 @@ export const UserUpdateForm = () => {
                 <label htmlFor='obra_social'>Obra social</label>
             </div>
 
+            <div className='flex justify-center'>
+                {
+                    isSubmitting
+                        ? <ButtonLoading label='Guardando...' />
+                        : <ButtonAnimated label='Guardar' />
 
-            {
-                isSubmitting ? (
-                    <div className='flex justify-center'>
+                }
 
-                        <button type="button" className="mt-4 bg-purple-600 h-12 w-48 rounded-lg text-white  overflow-hidden  font-bold hover:bg-purple-500 hover:cursor-not-allowed duration-[500ms,800ms]" disabled>
-                            <div className="flex items-center justify-center m-[10px]">
-                                <div className="h-5 w-5 border-t-transparent border-solid animate-spin rounded-full border-white border-4"></div>
-                                <div className="ml-2 text-xs"> Guardando... </div>
-                            </div>
-                        </button>
-                    </div>
-                ) : (
-                    <div className='flex justify-center'>
-                        <button className="mt-4  group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
-                            <div className="absolute inset-0 w-3 bg-purple-500 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-                            <span className="relative text-black group-hover:text-white">Guardar</span>
-                        </button>
-
-                    </div>
-                )
-            }
+            </div>
 
         </form>
 

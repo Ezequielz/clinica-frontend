@@ -1,12 +1,8 @@
-import { Title } from '@/app/components/ui/Title';
+import { ServiciosMedicosTable } from '@/app/components/admin/servicios-medicos/table/ServiciosMedicosTable';
 
 
 export default async function AdminServiciosMedicosPage() {
-
   return (
-    <div className="p-10 xl:ml-32 md:h-[calc(100vh-120px)] mt-2 ">
-      <Title title={"Administracion de servicios médicos"} />
-
-    </div>
+        <ServiciosMedicosTable />
   );
 }

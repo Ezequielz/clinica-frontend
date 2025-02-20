@@ -2,6 +2,7 @@ import { ServicioMedico } from "@/app/interfaces/services-medical"
 import Image from "next/image";
 import { Link } from 'next-view-transitions';
 import { Title } from "@/app/components/ui/Title";
+import { ButtonDefault } from "@/app/components/ui/buttons/ButtonDefault";
 
 interface Props {
     servicio: ServicioMedico;
@@ -26,11 +27,9 @@ export const ServiceBannerCard = ({ servicio }: Props) => {
 
                 <Link
                     href={`/servicios-medicos/${codigo_servicio}`}
-
-                    className="bg-purple-800 rounded-lg px-4 py-2 hover:bg-purple-500 text-slate-100 w-fit"
                 >
-
-                    Quiero un turno!
+                    <ButtonDefault label="Quiero un turno!"/>
+                    
                 </Link>
 
             </div>

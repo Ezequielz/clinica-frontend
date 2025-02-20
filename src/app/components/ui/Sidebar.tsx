@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import clsx from 'clsx';
-import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from 'react-icons/io5';
+import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPersonOutline, IoSearchOutline, IoTicketOutline } from 'react-icons/io5';
 import { useUIStore } from '@/store/ui/ui.store';
 import { UserRol } from '@/app/interfaces/user';
 import { logout } from '@/actions/auth/logout.action';
+import { MdDashboardCustomize } from 'react-icons/md';
 
 
 
@@ -18,8 +19,8 @@ export const Sidebar = () => {
 
     const { data: session } = useSession();
     const isAuthenticated = !!session?.user
-    const isAdmin = (session?.user.rol === UserRol.ADMIN)
-
+    const isAdmin = (session?.user?.rol === UserRol.ADMIN)
+    
     const handleLogout = async () => {
         await logout();
         window.location.replace('/');
@@ -70,7 +71,7 @@ export const Sidebar = () => {
                 {
                     session && (
                         <div>
-                            Hola, {session?.user.nombre} !
+                            Hola, {session?.user?.nombre} !
                         </div>
                     )
                 }
@@ -147,7 +148,7 @@ export const Sidebar = () => {
                                 onClick={() => closeMenu()}
                                 className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
                             >
-                                <IoShirtOutline size={30} />
+                                <MdDashboardCustomize size={30} />
                                 <span className="ml-3 text-xl">Dashboard/Admin</span>
                             </Link>
 

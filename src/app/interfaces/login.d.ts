@@ -13,7 +13,7 @@ interface User {
     email:     string;
     telefono:  string;
     direccion: string;
-    imagen:    null;
+    imagen?:    string;
     rol:       string;
     createdAt: Date;
     updatedAt: Date;

@@ -7,11 +7,13 @@ import { ViewTransitions } from 'next-view-transitions';
 import envs from '../../../config/envs';
 import { SnackbarProvider } from 'notistack';
 
+
 interface Props {
     children: React.ReactNode;
 };
 
 export const Providers = ({ children }: Props) => {
+
 
     return (
 

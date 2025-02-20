@@ -1,12 +1,12 @@
-import { Sidebar } from "../components/ui/Sidebar";
+import { Sidebar } from '../components/ui/Sidebar';
 import { Navbar } from '../components/ui/Navbar';
-import { Footer } from "../components/ui/Footer";
+import { Footer } from '../components/ui/Footer';
 
-export default function ClinicaLayout({ children }: { children: React.ReactNode }) {
+
+export default async function ClinicaLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <main className="min-h-screen relative">
-      {/* Aseguramos que el Navbar esté arriba */}
-
       <Navbar />
 
       <Sidebar />

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Title } from '../../ui/Title';
 import { Link } from 'next-view-transitions'
 import type { PaqueteById } from '@/app/interfaces/paquete';
+import { ButtonDefault } from '../../ui/buttons/ButtonDefault';
 
 interface Props {
     paquete: PaqueteById;
@@ -120,11 +121,8 @@ export const PaqueteByCode = ({ paquete }: Props) => {
                     </div>
                     <Link
                         href={`/reserva/paquete/${paquete.codigo_paquete}`}
-
-                        className="bg-purple-800 block mt-2 rounded-lg px-4 py-2 hover:bg-purple-500 text-slate-100 w-fit "
                     >
-
-                        Reservar turno
+                        <ButtonDefault label='Reservar turno'/>
                     </Link>
                 </div>
 

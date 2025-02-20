@@ -2,18 +2,20 @@
 import { redirect } from "next/navigation";
 
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import { formatDate } from "@/helpers/FormatDate";
+import { Session } from "next-auth";
 
-export const InfoProfileCard = () => {
+interface Props {
+    session: Session
+}
 
-    const { data } = useSession();
+export const InfoProfileCard = ({session}: Props) => {
 
-    if (!data) {
+    if (!session) {
         redirect('/auth/login')
     }
 
-    const { user } = data;
+    const { user } = session;
 
     return (
         <div className="flex justify-center m-auto shadow-lg rounded-lg w-full max-w-xl ">

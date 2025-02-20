@@ -53,7 +53,7 @@ export const updateUser = async (userUpdate: UserUpdate) => {
             userToUpdate,
             token,
         );
-
+      
         if (!ok) {
             return {
                 ok: false,

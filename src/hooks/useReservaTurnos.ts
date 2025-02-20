@@ -14,17 +14,21 @@ export const useReservaTurnos = () => {
     selectedMedico,
     selectedDate,
     selectedHorario,
-
+    isLoading,
     // Methods
     setAvailableDays,
     setHorarios,
     setSelectedMedico,
     setSelectedDate,
-    setSelectedHorario
+    setSelectedHorario,
+    setIsLoading,
 
-  } = useReservaTurnoStore( state => state );
+  } = useReservaTurnoStore(state => state);
 
 
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
   
 
   // Dias para el medico seleccionado
@@ -69,6 +73,10 @@ export const useReservaTurnos = () => {
           medicoId: selectedMedico.id_medico,
           fecha: formatDate.DateToString(selectedDate),
         });
+
+        if (!ok && message === 'invalid_token') {
+          window.location.replace('/auth/login');
+        }
         // console.log({ turnosReservados })
         if (!ok || !turnosReservados) throw new Error(message ?? 'Error al buscar turnos reservados');
         // Mapear horarios con su estado según los turnos reservados
@@ -137,12 +145,14 @@ export const useReservaTurnos = () => {
     horarios,
     selectedHorario,
     semana,
+    isLoading,
 
     // Methoods
     setSelectedMedico,
     setSelectedDate,
     setHorarios,
     setSelectedHorario,
+    setIsLoading,
     removeMedico,
     removeFecha,
     removeHorario,

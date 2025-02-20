@@ -48,10 +48,11 @@ export async function readTurnosReservados({
 
         const { ok, message, turnosReservados } = await turnosService.readTurnosReservadosByMedic(body);
 
-        if ( !ok && message === 'Invalid token'){
+        if (!ok && message === 'Invalid token') {
             await logout();
-            window.location.replace('/auth/login');
+            return { ok: false, message: 'invalid_token' };
         }
+        
         
         if (!ok) {
             return {

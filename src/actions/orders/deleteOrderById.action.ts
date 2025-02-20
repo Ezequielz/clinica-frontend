@@ -9,8 +9,7 @@ import { orderService } from '@/services/orders.service';
 export const deleteOrderById = async (orderId: string) => {
     const session = await auth();
     const userId = session?.user?.id;
-    //asdsa
-    // Verificar session usuario
+
     if (!userId) {
         redirect(`/auth/login`);
     };
@@ -29,6 +28,9 @@ export const deleteOrderById = async (orderId: string) => {
 
 
         revalidatePath('/consultas');
+        revalidatePath('/admin');
+        revalidatePath('/admin/orders');
+        revalidatePath(`/admin/orders/edit/${orderId}`);
 
         return {
             ok: true,

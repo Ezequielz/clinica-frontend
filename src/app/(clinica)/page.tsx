@@ -5,6 +5,7 @@ import { PaquetesBanner } from "../components/screens/home/paquetes/PaquetesBann
 import { ObraSocialBanner } from "../components/screens/home/obra-social/ObraSocial";
 
 export default function Home() {
+
   return (
     <div className="relative w-full">
       {/* TODO generar skeleton */}

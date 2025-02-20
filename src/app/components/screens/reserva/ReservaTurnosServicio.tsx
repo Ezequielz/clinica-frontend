@@ -24,6 +24,8 @@ export const ReservaTurnosServicio = ({ servicioMedico }: Props) => {
     setSelectedDate,
     setSelectedHorario
   } = useReservaTurnos();
+
+
   useEffect(() => {
 
     setSelectedMedico(null)
@@ -39,20 +41,16 @@ export const ReservaTurnosServicio = ({ servicioMedico }: Props) => {
   if (!isMounted) return null;
 
   return (
-    <div className='flex gap-2 px-20 min-h-screen'>
+    <div className='px-20 min-h-screen w-full flex flex-col justify-start items-center'>
 
-      <div className='w-1/2'>
-
+      <div className='flex gap-2 w-full'>
         <ReservationForm servicioMedico={servicioMedico} />
-      </div>
-
-
-      <div className='w-1/2'>
 
         <ReservationSummary />
       </div>
+      
+        <ConfirmServiceButton servicioMedico={servicioMedico} />
 
-      <ConfirmServiceButton servicioMedico={servicioMedico} />
 
     </div>
   );

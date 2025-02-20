@@ -7,6 +7,8 @@ import clsx from 'clsx';
 
 import { login } from '@/actions/auth/login.action';
 import { registerUser } from '@/actions/auth/register.action';
+import { ButtonAnimated } from '@/app/components/ui/buttons/ButtonAnimated';
+import { ButtonLoading } from '@/app/components/ui/buttons/ButtonLoading';
 
 
 type FormInputs = {
@@ -23,8 +25,10 @@ export const RegisterForm = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+        setIsLoading(true)
         setErrorMessage('');
         const { nombre, apellido, email, password } = data;
 
@@ -32,18 +36,19 @@ export const RegisterForm = () => {
         const resp = await registerUser({ nombre, apellido, email, password })
         if (!resp.ok) {
             setErrorMessage(resp.message);
+            setIsLoading(false);
             return;
         };
 
         await login(email.toLowerCase(), password);
 
         window.location.replace('/');
-
+       
     };
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col " autoComplete='off'>
 
 
             <label htmlFor="name">Nombre</label>
@@ -53,7 +58,7 @@ export const RegisterForm = () => {
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-2 text-slate-800",
                         {
                             'border-red-500': errors.nombre
                         }
@@ -71,7 +76,7 @@ export const RegisterForm = () => {
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-2 text-slate-800",
                         {
                             'border-red-500': errors.apellido
                         }
@@ -89,7 +94,7 @@ export const RegisterForm = () => {
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-2 text-slate-800",
                         {
                             'border-red-500': errors.email
                         }
@@ -107,7 +112,7 @@ export const RegisterForm = () => {
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-2 text-slate-800",
                         {
                             'border-red-500': errors.password
                         }
@@ -121,20 +126,13 @@ export const RegisterForm = () => {
             <span className="text-red-500">{errorMessage}</span>
 
 
-            <button
-                className="m-auto bg-purple-800 rounded-lg px-4 py-2 hover:bg-purple-500 text-slate-100 w-full"
-            >
+            <div className='flex justify-center'>
+                {
+                    !isLoading
+                        ? <ButtonAnimated label='Crear cuenta' />
+                        : <ButtonLoading label='Creando...' />
+                }
 
-
-                Crear cuenta
-            </button>
-
-
-            {/* divisor l ine */}
-            <div className="flex items-center my-5">
-                <div className="flex-1 border-t border-slate-300"></div>
-                <div className="px-2 text-slate-100">O </div>
-                <div className="flex-1 border-t border-slate-300"></div>
             </div>
 
 

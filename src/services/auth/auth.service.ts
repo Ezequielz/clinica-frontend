@@ -1,6 +1,7 @@
 import envs from '../../config/envs';
 import { type RegisterUserProps } from '@/actions/auth/register.action';
 import { type LoginResponse } from '@/app/interfaces/login';
+import { RenewTokenResponse } from '@/app/interfaces/renew';
 
 const API_URL = envs.API_URL;
 
@@ -74,6 +75,39 @@ const register = async ({ nombre, apellido, email, password }: RegisterUserProps
     }
 };
 
+const renewToken = async (token: string) => {
+    try {
+        const response = await fetch(`${API_URL}/api/auth/renew`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+
+        });
+        const data: RenewTokenResponse = await response.json();
+
+
+        if (!data.ok) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            newToken: data.token,
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+}
+
 
 
 export const authService = {
@@ -81,5 +115,6 @@ export const authService = {
     //Methods
     login,
     register,
+    renewToken,
 
 }

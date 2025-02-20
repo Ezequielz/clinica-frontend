@@ -5,6 +5,7 @@ import type { ConsultasPaqueteResponse } from '@/app/interfaces/consultas-pack';
 import type { CreateConsultasPack } from '@/actions/consultas/createConsultasPack.action';
 import { DeleteConsultaResponse } from '@/app/interfaces/delete-consulta';
 import { ConsultasByUserResponse } from '@/app/interfaces/consultasByPaciente';
+import { AllConsultasResponse } from '@/app/interfaces/allConsultas';
 
 const API_URL = envs.API_URL;
 
@@ -102,7 +103,39 @@ const createConsultasPack = async ({ paqueteDetails, paqueteCode }: CreateConsul
         };
     }
 };
+const readAllConsultas = async (token: string) => {
 
+    try {
+        const response = await fetch(`${API_URL}/api/consultas`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        const data: AllConsultasResponse = await response.json();
+
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            consultas: data.consultas
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+
+};
 const readConsultasByUser = async (consultaId: string, token: string) => {
 
     try {
@@ -174,4 +207,5 @@ export const consultasService = {
     createConsultasPack,
     readConsultasByUser,
     deleteConsultaById,
+    readAllConsultas,
 };

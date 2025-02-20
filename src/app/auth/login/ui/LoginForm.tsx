@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import clsx from 'clsx';
 import { login } from '@/actions/auth/login.action';
+import { ButtonAnimated } from '@/app/components/ui/buttons/ButtonAnimated';
+import { ButtonLoading } from '@/app/components/ui/buttons/ButtonLoading';
 
 type FormInputs = {
     email: string;
@@ -14,19 +16,21 @@ type FormInputs = {
 
 export const LoginForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormInputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+    const [isLoading, setIsLoading] = useState(false)
 
     const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         setErrorMessage('');
+        setIsLoading(true)
         const { email, password } = data;
 
         // Server action
         const resp = await login(email.toLowerCase(), password);
 
         if (!resp.ok) {
-
+            setIsLoading(false)
             setErrorMessage(resp.message);
             return;
         };
@@ -37,13 +41,13 @@ export const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" autoComplete='off'>
 
             <label htmlFor="email">Correo electrónico</label>
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-3 text-slate-800",
                         { 'border-red-500': errors.password }
                     )
                 }
@@ -60,7 +64,7 @@ export const LoginForm = () => {
             <input
                 className={
                     clsx(
-                        "px-5 py-2 border bg-gray-200 rounded mb-5 text-slate-800",
+                        "px-5 py-2 border bg-gray-200 rounded mb-3 text-slate-800",
                         { 'border-red-500': errors.password }
                     )
                 }
@@ -77,27 +81,15 @@ export const LoginForm = () => {
 
 
             <span className="text-red-500 mt-5">{errorMessage}</span>
-            <button
-                type='submit'
-                disabled={isSubmitting}
+            <div className='flex justify-center'>
+                {
+                    !isLoading
+                        ? <ButtonAnimated label='Ingresar' />
+                        : <ButtonLoading label='Ingresando...' />
+                }
 
-                className={clsx(
-
-                    " w-full text-slate-100  rounded-lg px-4 py-2 m-auto",
-                    {
-                        "bg-purple-800 hover:bg-purple-500": !isSubmitting,
-                        "bg-slate-500": isSubmitting
-                    })}>
-                Ingresar
-            </button>
-
-
-            {/* divisor l ine */}
-            <div className="flex items-center my-2">
-                <div className="flex-1 border-t border-slate-300"></div>
-                <div className="px-2 text-slate-100">O</div>
-                <div className="flex-1 border-t border-slate-300"></div>
             </div>
+
 
             <div className='mt-5 flex gap-2 '>
                 No tiene cuenta?

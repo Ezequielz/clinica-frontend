@@ -1,13 +1,14 @@
 export interface PaqueteByIdResponse {
     ok: boolean;
     paquete: PaqueteById;
+    error?: string;
 }
 
 export interface PaqueteById {
     id: string;
     codigo_paquete: string;
     nombre: string;
-    imagen: null;
+    imagen?: string;
     precio_paquete: number;
     servicios_incluidos: ServiciosIncluido[];
 }

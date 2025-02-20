@@ -23,10 +23,14 @@ export const ReservationForm = ({ servicioMedico }: Props) => {
 
     } = useReservaTurnos();
 
+    const isComplete = selectedMedico?.id_medico && selectedDate && selectedHorario;
+
+    if (isComplete) return null;
+
     return (
         <div className={
             clsx(
-                "w-full p-4 bg-white rounded-lg shadow-md",
+                "w-1/2 p-4 bg-white rounded-lg shadow-md",
                 {
                     "hidden": selectedDate && selectedHorario && selectedMedico?.id_medico
                 }

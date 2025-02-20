@@ -1,7 +1,9 @@
 
 import { DeleteOrderResponse } from '@/app/interfaces/delete-order';
 import envs from '../config/envs';
+import type { AllOrderResponse } from '@/app/interfaces/allOrder';
 import type { OrderByIDResponse } from '@/app/interfaces/orderById';
+import { GananciasResponse } from '@/app/interfaces/ganancias';
 
 const API_URL = envs.API_URL;
 interface UpdateOrder {
@@ -9,7 +11,76 @@ interface UpdateOrder {
     transactionId?: string;
     pagado?: boolean;
 };
+export interface GananciasDTO {
+    fecha_inicio?: string;
+    fecha_fin?: string
+    typo?: 'servicio' | 'pack'
+};
+const readGanancias = async (gananciasDto: GananciasDTO, token: string) => {
+    try {
+        const response = await fetch(`${API_URL}/api/orders/ganancias`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify(gananciasDto),
+        });
+        const data: GananciasResponse = await response.json();
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
 
+        return {
+            ok: true,
+            ganancias: data.ganancias
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+
+};
+const readAllOrders = async (token: string) => {
+
+    try {
+        const response = await fetch(`${API_URL}/api/orders`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        const data: AllOrderResponse = await response.json();
+
+        if (data.error) {
+            return {
+                ok: false,
+                message: data.error,
+            };
+        };
+
+        return {
+            ok: true,
+            orders: data.orders
+        };
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        return {
+            ok: false,
+
+            message: 'Error en la conexión con el servidor',
+        };
+    }
+
+};
 const readById = async(orderId: string, token: string) => {
 
     try {
@@ -115,4 +186,6 @@ export const orderService = {
     update,
     readById,
     deleteOrderById,
+    readAllOrders,
+    readGanancias,
 };

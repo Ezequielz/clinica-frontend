@@ -1,10 +1,12 @@
+import { UserRol } from "./user";
+
 export interface AllUsersResponse {
     ok:    boolean;
     users: User[];
     error?: string
 }
 
- interface User {
+ export interface User {
     id:        string;
     nombre:    string;
     apellido:  string;
@@ -14,10 +16,6 @@ export interface AllUsersResponse {
     telefono:  null | string;
     direccion: null | string;
     imagen:    null | string;
-    rol:       Rol;
+    rol:       UserRol;
 }
 
- enum Rol {
-    Admin = "ADMIN",
-    User = "USER",
-}
