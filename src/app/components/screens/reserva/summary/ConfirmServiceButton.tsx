@@ -8,12 +8,12 @@ import { motion } from 'framer-motion';
 import { createConsulta } from '@/actions/consultas/createConsulta.action';
 import { formatDate } from '@/helpers/FormatDate';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
-import type { ServicioMedico } from '@/app/interfaces/services-medical';
 import { ButtonAnimated } from '@/app/components/ui/buttons/ButtonAnimated';
 import { ButtonLoading } from '@/app/components/ui/buttons/ButtonLoading';
+import type{ Servicio } from '@/app/interfaces/service-medical';
 
 interface Props {
-    servicioMedico: ServicioMedico;
+    servicioMedico: Servicio;
 };
 
 

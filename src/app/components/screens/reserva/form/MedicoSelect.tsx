@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Select from 'react-select';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
-import { Medico } from '@/app/interfaces/services-medical';
+import { Medico } from '@/app/interfaces/service-medical';
 
 interface Props {
     medicos: Medico[];

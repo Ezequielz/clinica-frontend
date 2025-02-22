@@ -4,7 +4,7 @@ export interface AllConsultasResponse {
     error?: string;
 }
 
-interface Consulta {
+export interface Consulta {
     id:             string;
     fecha_consulta: Date;
     hora_consulta:  string;

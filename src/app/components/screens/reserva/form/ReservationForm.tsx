@@ -4,10 +4,10 @@ import clsx from 'clsx';
 import { MedicoSelect } from './MedicoSelect';
 import { CalendarTurnos } from './CalendarTurnos';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
-import type{ ServicioMedico } from '@/app/interfaces/services-medical';
+import { Servicio } from '@/app/interfaces/service-medical';
 
 interface Props {
-    servicioMedico: ServicioMedico;
+    servicioMedico: Servicio;
 
 }
 

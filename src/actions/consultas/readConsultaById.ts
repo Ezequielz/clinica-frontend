@@ -1,30 +1,24 @@
+
+
 'use server';
 
-import { UserRol } from '@/app/interfaces/user';
 import { auth } from '@/auth.config';
-import { usersService } from '@/services/users.service';
+import { consultasService } from '@/services/consultas.service';
 import { redirect } from 'next/navigation';
 
-export const readAllUsers = async (params?: string) => {
+export const readConsultasById = async (id: string) => {
     const session = await auth();
     const userId = session?.user?.id;
 
     // Verificar session usuario
     if (!userId) {
-        redirect(`/auth/login`)
+        redirect(`/auth/login`);
     };
-
-    if (session.user.rol !== UserRol.ADMIN) {
-        return {
-            ok: false,
-            message: 'No estás autorizado'
-        }
-    }
     const token = session!.user.token;
-
+    
     try {
-
-        const { ok, message, users } = await usersService.readAllUsers(token, params);
+        
+        const { ok, message, consultas } = await consultasService.readConsultasByUser(id, token);
 
         if (!ok) {
             return {
@@ -33,10 +27,9 @@ export const readAllUsers = async (params?: string) => {
             };
         };
 
-
         return {
             ok: true,
-            users,
+            consultas,
         };
 
     } catch (error) {

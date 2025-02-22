@@ -1,7 +1,7 @@
 
 
 interface Props {
-    label: string;
+    label?: string;
     onClick?: () => void;
     className?: string;
     icon?: React.ReactNode

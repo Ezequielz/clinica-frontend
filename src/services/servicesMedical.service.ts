@@ -6,6 +6,7 @@ import type { UpdateServiceMedicalResponse } from '@/app/interfaces/updateServic
 import type{ CreateServicioMedicoDTO } from '@/app/components/admin/servicios-medicos/ui/CreateServicioMedicoForm';
 import type { CreateServicioMedicoResponse } from '@/app/interfaces/createServicioMedico';
 import { DeleteServicioMedicoResponse } from '@/app/interfaces/deleteServicioMedico';
+import { ServiceMedicalResponse } from '@/app/interfaces/service-medical';
 
 const API_URL = envs.API_URL;
 
@@ -69,11 +70,11 @@ const readServicesMedical = async () => {
     }
 };
 
-const readServiceMedicalByCode = async (code: string) => {
+const readServiceMedicalById = async (id: string) => {
 
     try {
-        const response = await fetch(`${API_URL}/api/medical-services/${code}`);
-        const data: ServicesMedicalResponse = await response.json();
+        const response = await fetch(`${API_URL}/api/medical-services/${id}`);
+        const data: ServiceMedicalResponse = await response.json();
 
         if (!data.ok) {
             return {
@@ -84,7 +85,7 @@ const readServiceMedicalByCode = async (code: string) => {
 
         return {
             ok: true,
-            servicesMedical: data.servicios.at(0)
+            serviceMedical: data.servicio
         };
     } catch (error) {
         console.error('Error en la solicitud:', error);
@@ -166,7 +167,7 @@ export const servicesMedicalService = {
     //Methods
     createService,
     readServicesMedical,
-    readServiceMedicalByCode,
+    readServiceMedicalById,
     updateService,
     deleteService,
 

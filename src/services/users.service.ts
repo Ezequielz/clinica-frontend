@@ -6,10 +6,12 @@ import { DeleteUserResponse } from '@/app/interfaces/deleteUser';
 
 const API_URL = envs.API_URL;
 
-const readAllUsers = async (token: string) => {
+const readAllUsers = async (token: string, params?: string, ) => {
 
+    const url = params ? `${API_URL}/api/users?${params}` : `${API_URL}/api/users`;
+console.log({url})
     try {
-        const response = await fetch(`${API_URL}/api/users`, {
+        const response = await fetch(url, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -39,7 +41,8 @@ const readAllUsers = async (token: string) => {
     }
 
 };
-const readUserBySession = async (userId: string, token: string) => {
+
+const readUserById = async (userId: string, token: string) => {
 
     try {
         const response = await fetch(`${API_URL}/api/users/${userId}`, {
@@ -145,7 +148,7 @@ export const usersService = {
 
     //Methods
 
-    readUserBySession,
+    readUserById,
     readAllUsers,
     update,
     deleteUser,

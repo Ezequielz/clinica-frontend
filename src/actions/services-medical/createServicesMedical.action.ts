@@ -48,7 +48,7 @@ export const createServicesMedical = async (createServicioMedicoDTO: CreateServi
 
     try {
 
-        const { ok, message } = await servicesMedicalService.createService(newServiceMedical, token);
+        const { ok, message,medicalSpecialityCreated } = await servicesMedicalService.createService(newServiceMedical, token);
 
         if (!ok) {
             return {
@@ -60,6 +60,7 @@ export const createServicesMedical = async (createServicioMedicoDTO: CreateServi
 
         return {
             ok: true,
+            medicalSpecialityCreated
         };
 
     } catch (error) {

@@ -3,7 +3,7 @@ import { auth } from '@/auth.config';
 
 import { ReservaTurnosServicio } from '@/app/components/screens/reserva/ReservaTurnosServicio';
 import { Title } from '@/app/components/ui/Title';
-import { readServiceMedicalByCode } from '@/actions/services-medical/readServiceMedicalByCode.action';
+import { readServiceMedicalById } from '@/actions/services-medical/readServiceMedicalById.action';
 
 
 interface Props {
@@ -21,9 +21,9 @@ export default async function reservaScreen({ params }: Props) {
         redirect('/servicios-medicos')
     }
 
-    const { ok, servicesMedical } = await readServiceMedicalByCode(code);
+    const { ok, serviceMedical } = await readServiceMedicalById(code);
 
-    if (!ok || !servicesMedical) {
+    if (!ok || !serviceMedical) {
         return (
             <div className="min-h-screen p-20">
                 No se pudo obtener servicio médico, pruebe mas tarde o pongase en contacto con la clínica
@@ -35,10 +35,10 @@ export default async function reservaScreen({ params }: Props) {
         <div>
             <header className="px-12 py-2 ">
 
-                <Title title={`Reserva de turno para ${servicesMedical?.nombre}`} />
+                <Title title={`Reserva de turno para ${serviceMedical?.nombre}`} />
             </header>
 
-            <ReservaTurnosServicio servicioMedico={servicesMedical} />
+            <ReservaTurnosServicio servicioMedico={serviceMedical} />
         </div>
     )
 }

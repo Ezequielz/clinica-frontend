@@ -136,10 +136,10 @@ const readAllConsultas = async (token: string) => {
     }
 
 };
-const readConsultasByUser = async (consultaId: string, token: string) => {
+const readConsultasByUser = async (id: string, token: string) => {
 
     try {
-        const response = await fetch(`${API_URL}/api/consultas/${consultaId}`, {
+        const response = await fetch(`${API_URL}/api/consultas/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -168,6 +168,7 @@ const readConsultasByUser = async (consultaId: string, token: string) => {
         };
     }
 }
+
 
 const deleteConsultaById = async (consultaId: string, token: string) => {
     try {

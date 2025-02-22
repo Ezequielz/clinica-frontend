@@ -2,16 +2,16 @@
 
 import { servicesMedicalService } from '@/services/servicesMedical.service';
 
-export const readServiceMedicalByCode = async (code: string) => {
+export const readServiceMedicalById = async (id: string) => {
 
-    if (!code ) return {
+    if (!id ) return {
         ok: false,
         message: 'Missing code'
     }
 
     try {
 
-        const { ok, message, serviceMedical } = await servicesMedicalService.readServiceMedicalById(code);
+        const { ok, message, serviceMedical } = await servicesMedicalService.readServiceMedicalById(id);
 
         if (!ok) {
             return {

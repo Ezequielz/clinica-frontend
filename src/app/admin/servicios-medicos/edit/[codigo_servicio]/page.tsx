@@ -10,12 +10,12 @@ export default async function EditServicioMedicoPage({ params }: Props) {
 
       const { codigo_servicio } = await params;
     
-      const { ok, servicesMedical } = await readServiceMedicalByCode(codigo_servicio);
+      const { ok, serviceMedical } = await readServiceMedicalByCode(codigo_servicio);
     
-      if (!ok || !servicesMedical) return null;
+      if (!ok || !serviceMedical) return null;
 
       return (
-        <EditServicioMedicoForm servicioMedico={servicesMedical}/>
+        <EditServicioMedicoForm servicioMedico={serviceMedical}/>
       )
 
 }

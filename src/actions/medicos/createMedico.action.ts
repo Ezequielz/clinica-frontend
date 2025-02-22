@@ -1,30 +1,28 @@
 'use server';
 
-import { UserRol } from '@/app/interfaces/user';
 import { auth } from '@/auth.config';
-import { usersService } from '@/services/users.service';
-import { redirect } from 'next/navigation';
+import { CreateMedicoDTO } from '@/app/components/admin/medicos/ui/CreateMedicoForm';
+import { medicosService } from '@/services/medicos.service';
+import { revalidatePath } from 'next/cache';
 
-export const readAllUsers = async (params?: string) => {
+
+export const createMedico = async (createMedicoDTO: CreateMedicoDTO) => {
+
     const session = await auth();
     const userId = session?.user?.id;
 
     // Verificar session usuario
     if (!userId) {
-        redirect(`/auth/login`)
-    };
-
-    if (session.user.rol !== UserRol.ADMIN) {
         return {
             ok: false,
-            message: 'No estás autorizado'
-        }
-    }
+            message: 'No hay sessión de usuario',
+        };
+    };
     const token = session!.user.token;
 
     try {
 
-        const { ok, message, users } = await usersService.readAllUsers(token, params);
+        const { ok, message } = await medicosService.createMedico(createMedicoDTO, token);
 
         if (!ok) {
             return {
@@ -34,9 +32,13 @@ export const readAllUsers = async (params?: string) => {
         };
 
 
+        revalidatePath('/admin')
+        revalidatePath('/admin/medicos')
+        revalidatePath('/admin/medicos/new')
+
+
         return {
             ok: true,
-            users,
         };
 
     } catch (error) {

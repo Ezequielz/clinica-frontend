@@ -60,5 +60,6 @@ interface Servicio {
     nombre: string;
 }
 interface Order {
+    id: string;
     pagado: boolean;
 }

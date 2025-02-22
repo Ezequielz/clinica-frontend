@@ -8,11 +8,12 @@ import { ReservationSummary } from './summary/ReservationSummary';
 import { ReservationForm } from './form/ReservationForm';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
 
-import type { ServicioMedico } from '@/app/interfaces/services-medical';
+
 import { ConfirmServiceButton } from './summary/ConfirmServiceButton';
+import { Servicio } from '@/app/interfaces/service-medical';
 
 interface Props {
-  servicioMedico: ServicioMedico;
+  servicioMedico: Servicio;
 };
 
 export const ReservaTurnosServicio = ({ servicioMedico }: Props) => {

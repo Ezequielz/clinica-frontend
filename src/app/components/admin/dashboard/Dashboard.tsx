@@ -7,9 +7,11 @@ import { PanelOrders } from "./panels/PanelOrders";
 import { PanelPaquetes } from "./panels/PanelPaquetes";
 import { PanelConsultas } from "./panels/PanelConsultas";
 import { PanelGanancias } from "./panels/PanelGanancias";
+import { PanelMedicos } from "./panels/PanelMedicos";
 
 const panels = [
     {component: <PanelUsers />},
+    {component: <PanelMedicos />},
     {component: <PanelServiciosMedicos />},
     {component: <PanelOrders />},
     {component: <PanelPaquetes />},

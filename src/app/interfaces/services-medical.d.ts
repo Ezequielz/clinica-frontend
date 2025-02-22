@@ -1,6 +1,7 @@
 export interface ServicesMedicalResponse {
     ok: boolean;
     servicios: ServicioMedico[];
+    error?: string;
 }
 
 export interface ServicioMedico {

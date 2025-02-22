@@ -7,7 +7,7 @@ import { FaFileMedical } from 'react-icons/fa';
 import { AdminMenuList } from './AdminMenuList';
 import { Logo } from '../ui/Logo';
 import { FaArrowTrendUp } from 'react-icons/fa6';
-
+import { FaUserDoctor } from "react-icons/fa6";
 
 const menu = [
     {
@@ -26,6 +26,12 @@ const menu = [
         href: '/admin/servicios-medicos',
         icon: <MdOutlineLocalHospital size={30} />,
         label: 'Servicios',
+
+    },
+    {
+        href: '/admin/medicos',
+        icon: <FaUserDoctor size={30} />,
+        label: 'Medicos',
 
     },
     {
