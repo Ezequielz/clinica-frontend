@@ -1,5 +1,4 @@
 import { readPaqueteByCode } from "@/actions/paquetes/readPaqueteByCode.action";
-import { readServicesMedical } from "@/actions/services-medical/readServicesMedical.action";
 import { EditPaqueteForm } from "@/app/components/admin/paquetes/ui/EditPaqueteForm";
 
 
@@ -11,15 +10,10 @@ export default async function EditPaquetePage({ params }: Props) {
 
       const { codigo_paquete } = await params;
     
-      const [paqueteResponse, serviciosMedicosResponse] = await Promise.all([
-         readPaqueteByCode(codigo_paquete),
-         readServicesMedical(),
-      ]);
+     const {ok, paquete} = await readPaqueteByCode(codigo_paquete);
+   
 
-      const { ok: okPaquete, paquete } = paqueteResponse;
-      const { servicesMedical } = serviciosMedicosResponse;
-
-      if (!okPaquete || !paquete){
+      if (!ok || !paquete){
         return (
           <div>
             Error al obtener paquete
@@ -29,7 +23,7 @@ export default async function EditPaquetePage({ params }: Props) {
   
 
       return (
-        <EditPaqueteForm paquete={paquete} serviciosDisponibles={servicesMedical ?? null} />
+        <EditPaqueteForm paquete={paquete}  />
       )
 
 }

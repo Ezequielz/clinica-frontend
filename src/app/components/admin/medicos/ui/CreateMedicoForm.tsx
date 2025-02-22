@@ -40,7 +40,7 @@ export const CreateMedicoForm = ({ users, serviciosDisponibles }: Props) => {
     const onSubmit = async (createMedicoDTO: CreateMedicoDTO) => {
         const { ok, message } = await createMedico(createMedicoDTO);
         if (!ok) return enqueueSnackbar(message, { variant: 'error' });
-        enqueueSnackbar('Servicio creado', { variant: 'success' });
+        enqueueSnackbar('Médico creado', { variant: 'success' });
         reset();
     }
 

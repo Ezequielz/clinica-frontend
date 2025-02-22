@@ -33,9 +33,6 @@ export const OrdersInfo = async ({order}: Props) => {
             <td className="px-6 py-3 whitespace-no-wrap  border-b border-gray-200">
                 {formatDate.DateToString(new Date(order.createdAt))}
             </td>
-            <td className="px-6 text-sm leading-5  whitespace-no-wrap border-b border-gray-200">
-                eliminar
-            </td>
             <td className="px-6 py-3 whitespace-no-wrap  border-b border-gray-200">
                 <Link
                     href={`/admin/orders/edit/${order.id}`}

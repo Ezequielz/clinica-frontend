@@ -9,7 +9,7 @@ const API_URL = envs.API_URL;
 const readAllUsers = async (token: string, params?: string, ) => {
 
     const url = params ? `${API_URL}/api/users?${params}` : `${API_URL}/api/users`;
-console.log({url})
+
     try {
         const response = await fetch(url, {
             method: "GET",

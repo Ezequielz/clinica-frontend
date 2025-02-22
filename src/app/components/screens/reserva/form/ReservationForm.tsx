@@ -4,11 +4,10 @@ import clsx from 'clsx';
 import { MedicoSelect } from './MedicoSelect';
 import { CalendarTurnos } from './CalendarTurnos';
 import { useReservaTurnos } from '@/hooks/useReservaTurnos';
-import { Servicio } from '@/app/interfaces/service-medical';
+import { ServicioMedico } from '@/app/interfaces/paquete';
 
 interface Props {
-    servicioMedico: Servicio;
-
+    servicioMedico: ServicioMedico;
 }
 
 export const ReservationForm = ({ servicioMedico }: Props) => {

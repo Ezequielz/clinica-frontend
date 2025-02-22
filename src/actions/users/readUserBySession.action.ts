@@ -16,7 +16,7 @@ export const readUserBySession = async () => {
 
     try {
 
-        const { ok, message, user } = await usersService.readUserBySession(userId, token);
+        const { ok, message, user } = await usersService.readUserById(userId, token);
       
         if (!ok) {
             return {

@@ -135,9 +135,9 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
             {!isPaqueteCompleted && (
                 <>
 
-                    {servicios_incluidos.map((pack, index) => (
-                        <div key={pack.servicioId} className={index === currentIndex ? 'w-full flex px-20 gap-2' : 'hidden'}>
-                            <ReservationForm servicioMedico={pack.servicio} />
+                    {servicios_incluidos.map(({servicio}, index) => (
+                        <div key={servicio.id} className={index === currentIndex ? 'w-full flex px-20 gap-2' : 'hidden'}>
+                            <ReservationForm servicioMedico={servicio} />
 
                             {
                                 isServiceDetailsCompleted && (
@@ -146,8 +146,8 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
                                         {index === currentIndex && (
                                             <div className='flex justify-center w-full'>
                                                 <ButtonAnimated
-                                                    label={`Confirmar la reserva para ${pack.servicio.nombre}`}
-                                                    param={pack.servicioId}
+                                                    label={`Confirmar la reserva para ${servicio.nombre}`}
+                                                    param={servicio.codigo_servicio}
                                                     onClick={handleNext}
                                                 />
                                             </div>
