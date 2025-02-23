@@ -4,6 +4,7 @@ import envs from '../config/envs';
 import type { AllOrderResponse } from '@/app/interfaces/allOrder';
 import type { OrderByIDResponse } from '@/app/interfaces/orderById';
 import { GananciasResponse } from '@/app/interfaces/ganancias';
+import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasForm';
 
 const API_URL = envs.API_URL;
 interface UpdateOrder {
@@ -11,12 +12,10 @@ interface UpdateOrder {
     transactionId?: string;
     pagado?: boolean;
 };
-export interface GananciasDTO {
-    fecha_inicio?: string;
-    fecha_fin?: string
-    typo?: 'servicio' | 'pack'
-};
+
+
 const readGanancias = async (gananciasDto: GananciasDTO, token: string) => {
+
     try {
         const response = await fetch(`${API_URL}/api/orders/ganancias`, {
             method: "POST",

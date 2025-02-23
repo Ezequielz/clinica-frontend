@@ -26,7 +26,6 @@ export interface UserUpdate extends Partial<Omit<User, 'email' | 'imagen'>> {
 
 export const UserUpdateForm = () => {
     const { data: session, update } = useSession();
-    // const [loading, setLoading] = useState(false);
     const closeModal = useUIStore(store => store.closeModal);
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<UserUpdate>({
         defaultValues: async () => {
@@ -69,14 +68,13 @@ export const UserUpdateForm = () => {
         const file = event.target.files?.[0];
         if (file) {
             setSelectedImage(file);
-            setPreviewUrl(URL.createObjectURL(file)); // Previsualización de la imagen
+            setPreviewUrl(URL.createObjectURL(file)); 
         }
     };
 
     const onSubmit = async (data: UserUpdate) => {
         const updatedData = { ...data, imagen: selectedImage || data.imagen };
 
-        // const { ok, message } = await updateUser(filteredData);
 
         const { ok, message } = await updateUser(updatedData);
 

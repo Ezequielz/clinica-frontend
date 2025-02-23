@@ -1,10 +1,11 @@
 'use server';
 
+import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasForm';
 import { UserRol } from '@/app/interfaces/user';
 import { auth } from '@/auth.config';
 import { orderService } from '@/services/orders.service';
 import { redirect } from 'next/navigation';
-import { GananciasDTO } from '../../services/orders.service';
+
 
 export const readGanancias = async (gananciasDTO : GananciasDTO) => {
     const session = await auth();

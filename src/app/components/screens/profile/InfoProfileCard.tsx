@@ -1,22 +1,19 @@
-'use client'
-import { redirect } from "next/navigation";
+
 
 import Image from "next/image";
 import { formatDate } from "@/helpers/FormatDate";
-import { Session } from "next-auth";
+import { readUserById } from "@/actions/users/readUserById";
+
 
 interface Props {
-    session: Session
+    userId: string
 }
 
-export const InfoProfileCard = ({session}: Props) => {
+export const InfoProfileCard = async({userId}: Props) => {
 
-    if (!session) {
-        redirect('/auth/login')
-    }
+    const { ok, user} = await readUserById(userId);
 
-    const { user } = session;
-
+    if (!ok || !user) return null;
     return (
         <div className="flex justify-center m-auto shadow-lg rounded-lg w-full max-w-xl ">
            

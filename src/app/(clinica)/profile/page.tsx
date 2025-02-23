@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 export default async function ProfileScreen() {
   const session = await auth()
-  if (!session) {
+  if (!session?.user.id) {
     redirect('/auth/login')
   }
   return (
@@ -16,7 +16,7 @@ export default async function ProfileScreen() {
       <Title title='Mi Perfil' />
 
       <ModalEditProfile />
-      <InfoProfileCard session={session} />
+      <InfoProfileCard userId={session.user.id} />
       <ButtonOpenModal label="Editar Credencial" />
 
 
