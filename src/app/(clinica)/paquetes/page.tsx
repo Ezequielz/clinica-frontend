@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import { Title } from '@/app/components/ui/Title';
 import { PaquetesList } from '@/app/components/screens/paquetes/PaquetesList';
-
-
+import { SkeletonPaquetesList } from '@/app/components/screens/paquetes/ui/SkeletonPaquetesList';
 
 
 export default function PaquetesScreen() {
@@ -12,9 +11,7 @@ export default function PaquetesScreen() {
 
         <Title title="Todos nuestros paquetes" />
       </header>
-      {/* TODO skeletton */}
-      <Suspense fallback={<div>Cargando...</div>} >
-
+      <Suspense fallback={<SkeletonPaquetesList />} >
         <PaquetesList />
       </Suspense>
     </div>

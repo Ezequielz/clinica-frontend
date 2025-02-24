@@ -1,4 +1,4 @@
-import { GananciasForm } from '@/app/components/admin/ganancias/ui/GananciasForm';
+import { GananciasDetail } from '@/app/components/admin/ganancias/GananciasDetail';
 import { Title } from '@/app/components/ui/Title';
 
 
@@ -11,7 +11,7 @@ export default async function AdminGananciasPage() {
 
       </header>
       <section className='pt-20'>
-        <GananciasForm />
+        <GananciasDetail />
       </section>
 
     </div>

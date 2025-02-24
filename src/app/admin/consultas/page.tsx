@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { ConsultasTable } from '@/app/components/admin/consultas/table/ConsultasTable';
+import { SkeletonConsultasTable } from '@/app/components/admin/consultas/ui/SkeletonConsultasTable';
 import { Title } from '@/app/components/ui/Title';
 
 
@@ -11,7 +13,9 @@ export default async function AdminConsultasPage() {
 
       </header>
       <section className='pt-20'>
-        <ConsultasTable />
+        <Suspense fallback={<SkeletonConsultasTable />} >
+          <ConsultasTable />
+        </Suspense>
 
       </section>
 

@@ -1,9 +1,11 @@
-import { InfoProfileCard } from "@/app/components/screens/profile/InfoProfileCard";
-import { ModalEditProfile } from "@/app/components/screens/profile/ModalEditProfile";
-import { ButtonOpenModal } from "@/app/components/ui/ButtonOpenModal";
-import { Title } from "@/app/components/ui/Title";
-import { auth } from "@/auth.config";
-import { redirect } from "next/navigation";
+import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth.config';
+import { Title } from '@/app/components/ui/Title';
+import { InfoProfileCard } from '@/app/components/screens/profile/InfoProfileCard';
+import { ModalEditProfile } from '@/app/components/screens/profile/ModalEditProfile';
+import { ButtonOpenModal } from '@/app/components/ui/ButtonOpenModal';
+import { SkeletonInfoProfileCard } from '@/app/components/screens/profile/ui/SkeletonInfoProfileCard';
 
 
 export default async function ProfileScreen() {
@@ -16,7 +18,9 @@ export default async function ProfileScreen() {
       <Title title='Mi Perfil' />
 
       <ModalEditProfile />
-      <InfoProfileCard userId={session.user.id} />
+      <Suspense fallback={<SkeletonInfoProfileCard />} >
+        <InfoProfileCard userId={session.user.id} />
+      </Suspense>
       <ButtonOpenModal label="Editar Credencial" />
 
 

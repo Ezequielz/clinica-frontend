@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { Title } from "@/app/components/ui/Title";
+import { useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
+import { Title } from '@/app/components/ui/Title';
 
 export const PaquetesBanner = () => {
     const ref = useRef(null);
@@ -12,18 +12,10 @@ export const PaquetesBanner = () => {
     return (
         <section ref={ref} className="flex justify-center items-center px-20 w-full">
             <div className="pl-10 flex-col flex gap-5">
-                {/* Animación del título */}
-                {/* <motion.h3
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="font-semibold flex-wrap gap-y-4 justify-center text-balance text-purple-600 text-2xl md:text-5xl flex relative before:w-[40%] before:h-full before:rounded-full before:absolute before:-left-20 before:-top-10 before:-translate-x-1 before:bg-[#a855f7] before:blur-3xl before:opacity-70 before:-z-20"
-                >
-                    Usá más servicios, pagá menos!
-                </motion.h3> */}
+         
                 <Title title={'Usá más servicios, pagá menos!'} className="pb-2 font-semibold flex-wrap  justify-center text-balance text-2xl md:text-5xl flex relative" />
 
-                {/* Animación del párrafo */}
+              
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -33,7 +25,7 @@ export const PaquetesBanner = () => {
                     Hemos creado paquetes para ti! Elige el que incluya los servicios que necesites y ahorra un 15%!
                 </motion.p>
 
-                {/* Animación del botón */}
+            
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -48,7 +40,7 @@ export const PaquetesBanner = () => {
                 </motion.div>
             </div>
 
-            {/* Animación de la imagen */}
+        
             <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}

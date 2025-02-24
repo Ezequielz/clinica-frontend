@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const MonthlyChart = ({ month }: Props) => {
+
     const daysInMonth = Object.keys(month).sort((a, b) => {
         const numA = parseInt(a.split(" ")[1], 10);
         const numB = parseInt(b.split(" ")[1], 10);
@@ -15,7 +16,7 @@ export const MonthlyChart = ({ month }: Props) => {
 
     return (
         <motion.div
-            className="gap-6 p-4"
+            className="gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}

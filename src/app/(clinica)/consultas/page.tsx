@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/auth.config';
 import { Consultas } from '@/app/components/screens/consultas/Consultas';
 import { Title } from '@/app/components/ui/Title';
+import { SkeletonConsultas } from '@/app/components/screens/consultas/ui/SkeletonConsultas';
 
 export default function ConsultasPage() {
     const session = auth();
@@ -15,7 +16,7 @@ export default function ConsultasPage() {
 
             <Title title="Mis Consultas" />
 
-            <Suspense fallback={ <div >Cargando ...</div>} >
+            <Suspense fallback={<SkeletonConsultas /> } >
                 <Consultas />
             </Suspense>
 

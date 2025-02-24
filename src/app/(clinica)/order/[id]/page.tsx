@@ -1,7 +1,8 @@
 
+import { Suspense } from 'react';
 import { Title } from '@/app/components/ui/Title';
 import { OrderById } from '@/app/components/screens/order/OrderById';
-import { Suspense } from 'react';
+import { SkeletonOrderById } from '@/app/components/screens/order/ui/SkeletonOrderById';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -20,8 +21,7 @@ export default async function OrderScreen({ params }: Props) {
         <Title title={`Orden #${id.split('-').at(-1)}`} />
 
 
-        <Suspense  fallback={ <div>Cargando...</div> } >
-
+        <Suspense  fallback={ <SkeletonOrderById /> } >
           <OrderById id={id} />
         </Suspense>
 

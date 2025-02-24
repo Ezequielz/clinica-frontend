@@ -1,6 +1,7 @@
-import { ServicesMedicalList } from "@/app/components/screens/servicios-medicos/ServicesMedicalList";
-import { Title } from "@/app/components/ui/Title";
-import { Suspense } from "react";
+import { Suspense } from 'react';
+import { Title } from '@/app/components/ui/Title';
+import { ServicesMedicalList } from '@/app/components/screens/servicios-medicos/ServicesMedicalList';
+import { SkeletonServicesMedicalList } from '@/app/components/screens/servicios-medicos/ui/SkeletonServicesMedicalList';
 
 export default function ServiciosMedicosScreen() {
   return (
@@ -9,9 +10,7 @@ export default function ServiciosMedicosScreen() {
 
         <Title title="Todos nuestros servicios" />
       </header>
-      {/* TODO skeletton */}
-      <Suspense fallback={<div>Cargando...</div>} >
-
+      <Suspense fallback={<SkeletonServicesMedicalList />} >
         <ServicesMedicalList />
       </Suspense>
     </div>

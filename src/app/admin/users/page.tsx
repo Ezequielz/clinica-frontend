@@ -1,5 +1,7 @@
 import { UserTable } from '@/app/components/admin/users/table/UserTable';
+import { SkeletonUserTable } from '@/app/components/admin/users/ui/SkeletonUserTable';
 import { Title } from '@/app/components/ui/Title';
+import { Suspense } from 'react';
 
 
 export default async function AdminUsersPage() {
@@ -11,7 +13,9 @@ export default async function AdminUsersPage() {
 
       </header>
       <section className='pt-20'>
-        <UserTable />
+        <Suspense fallback={ <SkeletonUserTable /> } >
+          <UserTable />
+        </Suspense>
 
       </section>
 

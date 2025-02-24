@@ -1,9 +1,7 @@
 
-'use client'
-// Import Swiper React components
+'use client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Scrollbar, A11y } from 'swiper/modules';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -13,7 +11,7 @@ import { ServiceBannerCard } from './ServiceBannerCard';
 
 
 interface Props {
-    servicesMedical: ServicioMedico[]
+    servicesMedical: ServicioMedico[];
 };
 
 

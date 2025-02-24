@@ -60,7 +60,7 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
           {/* Lista de médicos */}
           <div className='mt-4'>
             <h3 className='text-lg font-bold text-gray-800'>Médicos Disponibles:</h3>
-            <ul className='mt-2 space-y-2'>
+            <ul className='my-2 space-y-2'>
               {servicioMedico!.medicos.map((medico, index) => (
                 <li key={index} className='p-3 bg-gray-100 rounded-lg'>
                   <p className='font-semibold text-gray-700'> {medico.user.nombre} {medico.user.apellido} </p>
@@ -76,6 +76,7 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
 
             <Link
               href={`/reserva/servicio/${codigoServicio}`}
+              className='mt-4'
             >
               <ButtonDefault label='Reservar turno' />
             </Link>

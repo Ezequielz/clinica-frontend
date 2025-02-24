@@ -8,36 +8,37 @@ import { PanelPaquetes } from "./panels/PanelPaquetes";
 import { PanelConsultas } from "./panels/PanelConsultas";
 import { PanelGanancias } from "./panels/PanelGanancias";
 import { PanelMedicos } from "./panels/PanelMedicos";
-
-const panels = [
-    {component: <PanelUsers />},
-    {component: <PanelMedicos />},
-    {component: <PanelServiciosMedicos />},
-    {component: <PanelOrders />},
-    {component: <PanelPaquetes />},
-    {component: <PanelConsultas />},
-    {component: <PanelGanancias />},
-]
-
+import { SkeletonPanel } from "./ui/SkeletonPanel";
 
 export const Dashboard = async () => {
 
 
     return (
         <div className="p-6 grid gap-10 md:grid-cols-2 xl:grid-cols-3 mt-5">
-            {
-              
-                panels.map((panel, index) => {
-                  
-                    return (
-                        <Suspense key={index} fallback={ <div>Cargando...</div> }>
-                            {panel.component}
-                          
-                        </Suspense>
 
-                    )
-                })
-            }
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelUsers />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelMedicos />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelServiciosMedicos />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelOrders />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelPaquetes />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelConsultas />
+            </Suspense>
+            <Suspense fallback={<SkeletonPanel />}>
+                <PanelGanancias />
+            </Suspense>
+
+
 
         </div>
     )

@@ -6,8 +6,7 @@ import { DeleteOrderButton } from './DeleteOrderButton';
 
 export const Consultas = async () => {
 
-    const { ok, consultas, message } = await readConsultasByUser();
-    console.log(message)
+    const { ok, consultas } = await readConsultasByUser();
     if (!ok || !consultas) {
         return (
             <div>

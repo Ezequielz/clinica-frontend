@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import clsx from 'clsx';
-import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPersonOutline, IoSearchOutline, IoTicketOutline } from 'react-icons/io5';
+import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPersonOutline, IoTicketOutline } from 'react-icons/io5';
 import { useUIStore } from '@/store/ui/ui.store';
 import { UserRol } from '@/app/interfaces/user';
 import { logout } from '@/actions/auth/logout.action';
@@ -78,14 +78,14 @@ export const Sidebar = () => {
 
 
                 {/* Input */}
-                <div className="relative mt-7">
+                {/* <div className="relative mt-7">
                     <IoSearchOutline size={20} className="absolute top-2 left-2" />
                     <input
                         type="text"
                         placeholder="Buscar"
                         className="w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200 focus:outline-none focus:border-blue-500"
                     />
-                </div>
+                </div> */}
 
                 {/* Menú */}
 
