@@ -72,11 +72,19 @@ export const ReservationForm = ({ servicioMedico }: Props) => {
                             < button
                                 key={hora}
                                 onClick={() => setSelectedHorario(hora)}
-                                disabled={estado === 'reservado'}
-                                className={`p-2 text-center cursor-pointer rounded-lg 
-                                            ${estado === 'disponible' ? 'bg-green-500'
-                                            : estado === 'reservado' ? 'bg-orange-500'
-                                            : 'bg-red-500 cursor-not-allowed'}`}
+                                disabled={estado === 'completo'}
+
+                                className={
+                                    clsx(
+                                        "p-2 text-center text-white  rounded-lg",
+                                        {
+                                           "bg-green-500 cursor-pointer hover:bg-green-400" : estado === 'disponible',
+                                           "bg-orange-500 cursor-pointer hover:bg-orange-400": estado === 'reservado',
+                                           "bg-red-500 cursor-not-allowed cursor": estado === 'completo',
+                                        }
+                                    )
+                                }
+                          
                             >
                                 {hora}hs
                             </button>
