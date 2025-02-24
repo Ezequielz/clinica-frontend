@@ -21,9 +21,9 @@ export const SelectRol = ({ userId, currentUserRol }: Props) => {
 
     const updateUserRole = async (newRol: UserRol) => {
 
-        const { ok } = await updateUser({ id: userId, rol: newRol });
+        const { ok, message } = await updateUser({ id: userId, rol: newRol });
 
-        if (!ok) return enqueueSnackbar('Hubo un error al actualizar el rol', { variant: "error" });
+        if (!ok) return enqueueSnackbar(`Hubo un error al actualizar el rol, ${message}`, { variant: "error" });
         enqueueSnackbar(`Rol actualizado`, { variant: "success" });
     };
 

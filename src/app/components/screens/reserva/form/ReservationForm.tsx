@@ -55,6 +55,18 @@ export const ReservationForm = ({ servicioMedico }: Props) => {
                 <div className="mt-4">
 
                     <h3 className="text-md font-bold">Horarios disponibles</h3>
+                    {
+                        horarios.length < 1 && (
+                            <div className='grid grid-cols-3 gap-2 w-full mt-2'>
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                                <div className='h-12 w-full bg-slate-200 animate-pulse' />
+                            </div>
+                        )
+                    }
                     <div className="grid grid-cols-3 gap-2 w-full mt-2">
                         {horarios.map(({ hora, estado }) => (
                             < button
@@ -69,6 +81,21 @@ export const ReservationForm = ({ servicioMedico }: Props) => {
                                 {hora}hs
                             </button>
                         ))}
+                    </div>
+                    <div >
+                        Estado:
+                        <div className='flex gap-2 items-center'>
+                            <div className='h-4 w-4 bg-green-500 rounded-full'/>
+                            <span>Turnos disponibles</span>
+                        </div>
+                        <div className='flex gap-2 items-center'>
+                            <div className='h-4 w-4 bg-orange-500 rounded-full'/>
+                            <span>1 solo turno disponible</span>
+                        </div>
+                        <div className='flex gap-2 items-center'>
+                            <div className='h-4 w-4 bg-red-500 rounded-full'/>
+                            <span>No hay turno disponible</span>
+                        </div>
                     </div>
                 </div>
             )}

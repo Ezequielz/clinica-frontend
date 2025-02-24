@@ -18,7 +18,7 @@ export default async function AuthLayout({ children }: {
 
 
             <div className="w-full sm:w-[350px] px-10">
-
+                    
                 {children}
 
             </div>

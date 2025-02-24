@@ -39,11 +39,66 @@ export const OrderById = async ({ id }: Props) => {
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-10">
 
             {/* Servicios */}
-            <OrderDetails order={order} />
+            <div>
+
+                <OrderDetails order={order} />
+
+                {
+                    !order.pagado && (
+                        <div className='bg-amber-400 p-4 rounded-lg relative my-10'>
+                            <strong className='absolute top-0 right-0 h-5 w-5 bg-red-500  animate-ping rounded-full' />
+
+                            <h3 className='mt-1 font-bold'>
+                                Demo:
+
+                            </h3>
+
+                            <div className='bg-white p-2 w-full border-2 border-red-500 rounded-lg flex flex-col'>
+                                <p className='text-2xl text-red-500 font-bold'>
+                                    Desloguear cuenta principal de paypal
+                                </p>
+
+                                <span className='text-sm'>Si completas una compra con tu cuenta, se te aplicaran los cargos a la misma</span>
+                                <span>Utilizá las cuentas siguientes para hacer pruebas</span>
+                            </div>
+
+
+                            <p className='flex flex-col'>
+                                <strong>
+                                    Cuenta Paypal con fondos
+                                </strong>
+                                <span>
+                                    email: cuentatest1@gmail.com
+                                </span>
+                                <span>
+                                    password: 12345678
+                                </span>
+
+                            </p>
+                            <p className='flex flex-col'>
+                                <strong>
+                                    Cuenta Paypal sin fondos
+                                </strong>
+                                <span>
+                                    email: cuentaest2@gmail.com
+                                </span>
+                                <span>
+                                    password: 12345678
+                                </span>
+
+                            </p>
+
+
+                        </div>
+                    )
+                }
+
+
+            </div>
 
             {/* Summary - Resumen de orden */}
-            <section className="bg-white rounded-xl shadow-xl md:p-7">
-             
+            <section className="bg-white rounded-xl shadow-xl md:p-7 h-fit">
+
 
                 <OrderSummary order={order} />
 

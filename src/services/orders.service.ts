@@ -4,7 +4,8 @@ import envs from '../config/envs';
 import type { AllOrderResponse } from '@/app/interfaces/allOrder';
 import type { OrderByIDResponse } from '@/app/interfaces/orderById';
 import { GananciasResponse } from '@/app/interfaces/ganancias';
-import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasForm';
+import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasFilterForm';
+
 
 const API_URL = envs.API_URL;
 interface UpdateOrder {

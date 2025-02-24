@@ -28,7 +28,7 @@ export const PaypalBtn = ({ orderId, amount, }: Props) => {
             ],
         });
 
-     
+
         // guardar el ID (transactionId)  de la orden de paypal en la base de datos
         const { ok, message } = await updateOrder({ orderId, transactionId });
 
@@ -46,7 +46,7 @@ export const PaypalBtn = ({ orderId, amount, }: Props) => {
 
         const details = await actions.order?.capture();
         if (!details) return;
-                                                // details.id = transactionId
+        // details.id = transactionId
         const { ok, message } = await checkPayment(details.id!);
 
         if (!ok) {
@@ -57,7 +57,8 @@ export const PaypalBtn = ({ orderId, amount, }: Props) => {
     };
 
     return (
-        <div className="relative z-0">
+        <div className="relative z-0 h-fit">
+
             {error && (
                 <span className='text-red-500'> {error} </span>
             )}
@@ -65,6 +66,9 @@ export const PaypalBtn = ({ orderId, amount, }: Props) => {
                 createOrder={createOrderInPaypal}
                 onApprove={onApproveForPaypal}
             />
+
+
+
         </div>
     )
 }

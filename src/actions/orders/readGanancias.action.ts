@@ -1,6 +1,6 @@
 'use server';
 
-import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasForm';
+import { GananciasDTO } from '@/app/components/admin/ganancias/ui/GananciasFilterForm';
 import { UserRol } from '@/app/interfaces/user';
 import { auth } from '@/auth.config';
 import { orderService } from '@/services/orders.service';
