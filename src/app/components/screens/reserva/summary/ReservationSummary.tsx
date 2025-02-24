@@ -26,7 +26,7 @@ export const ReservationSummary = () => {
 
     return (
         <motion.div
-            className="rounded-lg shadow-lg p-6 bg-white text-gray-900 mx-auto transition-all w-1/2"
+            className="w-full sm:w-1/2 rounded-lg shadow-lg p-6 bg-white text-gray-900 mx-auto transition-all "
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}

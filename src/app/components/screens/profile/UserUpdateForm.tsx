@@ -1,18 +1,20 @@
 
 'use client'
 
+import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { User } from 'next-auth';
 import { useSession } from "next-auth/react";
 import { useForm } from 'react-hook-form';
+import { IoCloudUploadOutline } from 'react-icons/io5';
 import { enqueueSnackbar } from 'notistack';
+import clsx from 'clsx';
 import { useUIStore } from '@/store/ui/ui.store';
 import { readUserBySession } from '@/actions/users/readUserBySession.action';
 import { updateUser } from '@/actions/users/updateUser.action';
-import clsx from 'clsx';
-import { useState } from 'react';
-import Image from 'next/image';
 import { ButtonAnimated } from '../../ui/buttons/ButtonAnimated';
 import { ButtonLoading } from '../../ui/buttons/ButtonLoading';
+import { ButtonDefault } from '../../ui/buttons/ButtonDefault';
 
 
 export interface UserUpdate extends Partial<Omit<User, 'email' | 'imagen'>> {
@@ -25,6 +27,7 @@ export interface UserUpdate extends Partial<Omit<User, 'email' | 'imagen'>> {
 
 
 export const UserUpdateForm = () => {
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const { data: session, update } = useSession();
     const closeModal = useUIStore(store => store.closeModal);
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<UserUpdate>({
@@ -68,8 +71,11 @@ export const UserUpdateForm = () => {
         const file = event.target.files?.[0];
         if (file) {
             setSelectedImage(file);
-            setPreviewUrl(URL.createObjectURL(file)); 
+            setPreviewUrl(URL.createObjectURL(file));
         }
+    };
+    const handleButtonClick = () => {
+        fileInputRef.current?.click();
     };
 
     const onSubmit = async (data: UserUpdate) => {
@@ -100,24 +106,32 @@ export const UserUpdateForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className=" w-full gap-2 " autoComplete='off'>
+        <form onSubmit={handleSubmit(onSubmit)} className=" w-full max-w-96 gap-2 " autoComplete='off'>
 
-            <div className="flex flex-col mt-4">
-                <label htmlFor="imagen">Imagen de Perfil</label>
+            <div className="flex flex-col  w-full">
+
+                <Image
+                    src={previewUrl ?? session?.user.imagen ?? 'https://res.cloudinary.com/zapataezequiel/image/upload/v1738967258/default-image-not-found.webp'}
+                    alt="Previsualización"
+                    className="mt-2 w-full object-cover "
+                    height={500}
+                    width={500}
+                />
                 <input
+                    ref={fileInputRef}
+                    hidden
                     type="file"
                     accept="image/*"
-                    className="px-5 py-2 border bg-gray-200 rounded text-slate-800"
                     onChange={handleImageChange}
                 />
-                {previewUrl && (
-                    <Image
-                        src={previewUrl ?? 'https://res.cloudinary.com/zapataezequiel/image/upload/v1738967258/default-image-not-found.webp'}
-                        alt="Previsualización" className="mt-2 w-32 h-32 object-cover rounded-full"
-                        height={500}
-                        width={500}
-                    />
-                )}
+
+                <ButtonDefault
+                    label="Subir Imagen"
+                    onClick={handleButtonClick}
+                    className="w-full"
+                    icon={<IoCloudUploadOutline size={25} />}
+                />
+
             </div>
 
             <input type="password" name="fakePassword" style={{ display: "none" }} autoComplete="off" />

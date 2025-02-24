@@ -113,11 +113,11 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
 
     return (
         <div className='flex flex-col items-center  min-h-screen'>
-            <div className="flex gap-4 mb-4">
+            <div className="flex gap-2 sm:gap-4 mb-4">
                 {servicios_incluidos.map((pack, index) => (
                     <span
                         key={pack.servicioId}
-                        className={`px-4 py-2 border-b-2 ${index === currentIndex ? 'border-purple-700 font-bold' : 'border-gray-300'}`}
+                        className={`px-2 sm:px-4 py-2 border-b-2 text-sm sm:text-lg ${index === currentIndex ? 'border-purple-700 font-bold' : 'border-gray-300'}`}
                     >
                         {pack.servicio.nombre}
                     </span>
@@ -136,7 +136,7 @@ export const ReservaTurnosPack = ({ paquete }: Props) => {
                 <>
 
                     {servicios_incluidos.map(({servicio}, index) => (
-                        <div key={servicio.id} className={index === currentIndex ? 'w-full flex px-20 gap-2' : 'hidden'}>
+                        <div key={servicio.id} className={index === currentIndex ? 'w-full flex flex-col sm:flex-row px-5 md:px-20 gap-2' : 'hidden'}>
                             <ReservationForm servicioMedico={servicio} />
 
                             {

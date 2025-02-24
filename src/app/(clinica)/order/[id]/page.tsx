@@ -14,7 +14,7 @@ export default async function OrderScreen({ params }: Props) {
 
   return (
 
-    <div className="flex justify-center items-center mb-72 px-20 ">
+    <div className="flex justify-center items-center mb-72 px-5 md:px-20 ">
 
       <div className="flex flex-col w-full">
 

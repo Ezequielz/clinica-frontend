@@ -8,8 +8,8 @@ import { useUIStore } from '@/store/ui/ui.store';
 import { UserRol } from '@/app/interfaces/user';
 import { logout } from '@/actions/auth/logout.action';
 import { MdDashboardCustomize } from 'react-icons/md';
-
-
+import { MdOutlineLocalHospital } from 'react-icons/md';
+import { TbListDetails } from 'react-icons/tb';
 
 
 export const Sidebar = () => {
@@ -20,7 +20,7 @@ export const Sidebar = () => {
     const { data: session } = useSession();
     const isAuthenticated = !!session?.user
     const isAdmin = (session?.user?.rol === UserRol.ADMIN)
-    
+
     const handleLogout = async () => {
         await logout();
         window.location.replace('/');
@@ -88,6 +88,27 @@ export const Sidebar = () => {
                 </div> */}
 
                 {/* Menú */}
+                <div className='sm:hidden'>
+                    <Link
+                        href="/servicios-medicos"
+                        onClick={() => closeMenu()}
+                        className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+                    >
+                        <MdOutlineLocalHospital size={30} />
+                        <span className="ml-3 text-xl">Especialidades</span>
+                    </Link>
+                    <Link
+                        href="/paquetes"
+                        onClick={() => closeMenu()}
+                        className="flex items-center mt-3 p-2 hover:bg-gray-100 rounded transition-all"
+                    >
+                        <TbListDetails size={30} />
+                        <span className="ml-3 text-xl">Paquetes</span>
+                    </Link>
+
+                    <hr className="w-full h-px bg-gray-200 my-2" />
+
+                </div>
 
                 {
                     isAuthenticated && (
@@ -141,7 +162,7 @@ export const Sidebar = () => {
                 {
                     isAdmin && (
                         <>
-                            <div className="w-full h-px bg-gray-200 my-2" />
+                            <hr className="w-full h-px bg-gray-200 my-2" />
 
                             <Link
                                 href="/admin"

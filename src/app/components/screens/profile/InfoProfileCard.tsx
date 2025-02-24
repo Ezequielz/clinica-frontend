@@ -15,9 +15,9 @@ export const InfoProfileCard = async({userId}: Props) => {
 
     if (!ok || !user) return null;
     return (
-        <div className="flex justify-center m-auto shadow-lg rounded-lg w-full max-w-xl ">
+        <div className="mt-4 flex flex-col sm:flex-row justify-center m-auto shadow-lg rounded-lg w-fit md:w-full max-w-xl ">
            
-            <div className='w-1/2 flex flex-col items-center p-6 bg-cyan-500 rounded-l-lg'>
+            <div className='md:w-1/2 flex flex-col items-center p-6 bg-cyan-500 md:rounded-l-lg'>
 
                 <Image
                     height={500}
@@ -31,7 +31,7 @@ export const InfoProfileCard = async({userId}: Props) => {
             </div>
 
 
-            <div className="w-full relative flex flex-col min-h-full  bg-white rounded-r-lg">
+            <div className="w-full relative flex flex-col min-h-full  bg-white md:rounded-r-lg">
                 {/* Logo */}
                 <Image
 
@@ -39,7 +39,7 @@ export const InfoProfileCard = async({userId}: Props) => {
                     alt="logo"
                     height={500}
                     width={500}
-                    className="w-32 h-3w-32 object-cover absolute top-0 right-0"
+                    className="hidden sm:block w-32 h-3w-32 object-cover absolute top-0 right-0"
                 />
                 <div className="flex flex-col flex-grow justify-between h-full">
 
@@ -65,7 +65,7 @@ export const InfoProfileCard = async({userId}: Props) => {
                     </ul>
 
                     {/* Footer pegado abajo */}
-                    <footer className=" text-center border-t p-2 bg-purple-500 rounded-br-lg text-white">
+                    <footer className=" text-center border-t p-2 bg-purple-500 md:rounded-br-lg text-white">
                         {user.id}
                     </footer>
                 </div>

@@ -34,7 +34,7 @@ export const Modal = ({ children }: Props) => {
 
             <div
                 onClick={handleCloseDialog}
-                className="fade-in fixed top-0 left-0 w-screen h-screen z-30 backdrop-filter backdrop-blur-sm "
+                className=" fade-in fixed top-0 left-0 w-screen h-screen z-30 backdrop-filter backdrop-blur-sm "
             />
             <article className=" overflow-y-auto rounded-lg fixed lg:px-5 py-4 w-screen sm:w-3/4  lg:w-fit  m-auto inset-x-0 inset-y-0 bg-slate-100 z-30 shadow-2xl  transition-all duration-300 h-5/6">
 

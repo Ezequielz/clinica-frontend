@@ -1,11 +1,11 @@
 'use client';
-import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Title } from '../../ui/Title';
-import { type ServicioMedico } from '@/app/interfaces/services-medical';
-import Link from 'next/link';
 import { ButtonDefault } from '../../ui/buttons/ButtonDefault';
+import { type ServicioMedico } from '@/app/interfaces/services-medical';
 
 interface Props {
   servicioMedico: ServicioMedico;
@@ -24,7 +24,6 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
       transition={{ duration: 0.6 }}
       className='w-full px-6 md:px-20 flex flex-col md:flex-row gap-6 md:gap-10 '
     >
-      {/* Imagen del servicio */}
       <motion.div
         // initial={{ opacity: 0, scale: 0.9 }}
         // animate={{ opacity: 1, scale: 1 }}
@@ -41,7 +40,6 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
         />
       </motion.div>
 
-      {/* Detalles del servicio */}
       <div
 
         className='w-full md:w-1/2 space-y-4'
@@ -57,7 +55,6 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
           <p className='text-gray-600'>{servicioMedico!.descripcion}</p>
           <p className='text-xl font-semibold text-purple-600'>${servicioMedico!.precio}</p>
 
-          {/* Lista de médicos */}
           <div className='mt-4'>
             <h3 className='text-lg font-bold text-gray-800'>Médicos Disponibles:</h3>
             <ul className='my-2 space-y-2'>
@@ -73,13 +70,18 @@ export const ServicioMedicoByCode = ({ servicioMedico }: Props) => {
               ))}
             </ul>
 
+            <div className='mt-4 flex justify-end md:justify-start'>
 
-            <Link
-              href={`/reserva/servicio/${codigoServicio}`}
-              className='mt-4'
-            >
-              <ButtonDefault label='Reservar turno' />
-            </Link>
+              <Link
+                href={`/reserva/servicio/${codigoServicio}`}
+                className='mt-4'
+              >
+                <ButtonDefault
+                  label='Reservar turno'
+
+                />
+              </Link>
+            </div>
           </div>
 
         </motion.div>

@@ -14,7 +14,7 @@ export default async function ProfileScreen() {
     redirect('/auth/login')
   }
   return (
-    <div className="relative w-full px-20 min-h-screen">
+    <div className="relative w-full px-5 md:px-20 min-h-screen">
       <Title title='Mi Perfil' />
 
       <ModalEditProfile />

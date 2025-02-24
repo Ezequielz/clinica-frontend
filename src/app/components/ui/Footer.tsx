@@ -4,7 +4,7 @@ import { PiXLogo } from "react-icons/pi";
 export const Footer = () => {
     return (
         <footer className="bg-gray-900 text-white  overflow-hidden">
-            <div className="container mx-auto flex flex-col md:flex-row items-center justify-between p-10 ">
+            <div className="container mx-auto flex flex-col md:flex-row gap-5 items-center justify-between p-10 ">
 
                 <div className="w-full mb-6 md:mb-0  flex justify-center">
                     <Image

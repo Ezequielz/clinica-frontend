@@ -64,7 +64,7 @@ export const ConfirmServiceButton = ({ servicioMedico }: Props) => {
     return (
 
         <motion.div
-            className=" w-1/2 bg-slate-100 p-4 rounded-lg shadow-md h-fit"
+            className="w-full sm:w-1/2 bg-slate-100 p-4 rounded-lg shadow-md h-fit"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
         >

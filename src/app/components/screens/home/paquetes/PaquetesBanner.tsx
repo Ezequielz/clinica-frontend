@@ -1,35 +1,35 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import { Title } from '@/app/components/ui/Title';
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { Title } from "@/app/components/ui/Title";
 
 export const PaquetesBanner = () => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     return (
-        <section ref={ref} className="flex justify-center items-center px-20 w-full">
-            <div className="pl-10 flex-col flex gap-5">
-         
-                <Title title={'Usá más servicios, pagá menos!'} className="pb-2 font-semibold flex-wrap  justify-center text-balance text-2xl md:text-5xl flex relative" />
+        <section ref={ref} className="flex flex-col-reverse md:flex-row md:justify-center md:items-center p-5 md:px-10 lg:px-20 w-full">
+            <div className="sm:pl-10 flex-col flex gap-5">
+           
+                <Title title={'Usá más servicios, pagá menos!'} 
+                className="pb-2 font-semibold flex-wrap  md:justify-center text-balance text-2xl sm:text-3xl md:text-4xl lg:text-6xl flex relative" />
 
-              
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                    className="text-xl text-balance"
+                    className="text-lg md:text-xl text-balance"
                 >
                     Hemos creado paquetes para ti! Elige el que incluya los servicios que necesites y ahorra un 15%!
                 </motion.p>
 
-            
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                    className="flex justify-end md:justify-start"
                 >
                     <Link
                         href={`/paquetes`}
@@ -40,7 +40,6 @@ export const PaquetesBanner = () => {
                 </motion.div>
             </div>
 
-        
             <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}

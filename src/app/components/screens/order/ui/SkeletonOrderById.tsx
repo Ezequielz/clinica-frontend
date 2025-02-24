@@ -8,7 +8,7 @@ export const SkeletonOrderById = () => {
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
             <SkeletonOrderDetails />
 
-            <section className="bg-white rounded-xl shadow-xl p-7">
+            <section className="bg-white rounded-xl shadow-xl md:p-7">
                 <SkeletonOrderSummary />
 
                 <footer className="mt-5 mb-2 w-full">
@@ -29,10 +29,10 @@ const SkeletonOrderDetails = () => {
             <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
                 <thead>
                     <tr className="bg-gray-100">
-                        <th className="px-4 py-2 border">Servicio</th>
-                        <th className="px-4 py-2 border">Fecha</th>
-                        <th className="px-4 py-2 border">Horario</th>
-                        <th className="px-4 py-2 border">Médico</th>
+                        <th className="md:px-4 px-2 md:py-2 py-1 border">Servicio</th>
+                        <th className="md:px-4 px-2 md:py-2 py-1 border">Fecha</th>
+                        <th className="md:px-4 px-2 md:py-2 py-1 border">Horario</th>
+                        <th className="md:px-4 px-2 md:py-2 py-1 border">Médico</th>
                     </tr>
                 </thead>
                 <tbody>

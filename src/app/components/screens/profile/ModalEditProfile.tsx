@@ -20,7 +20,7 @@ export const ModalEditProfile = () => {
     return (
         <Modal >
 
-            <div className="flex flex-col justify-center items-center p-2 rounded-lg max-w-[600px] min-w-[300px]">
+            <div className="px-2 flex flex-col justify-center items-center p-2 rounded-lg max-w-[600px] md:min-w-[300px]">
 
                 <IoClose
                     onClick={closeModal}

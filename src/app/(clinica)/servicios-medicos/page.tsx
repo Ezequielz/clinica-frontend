@@ -6,7 +6,7 @@ import { SkeletonServicesMedicalList } from '@/app/components/screens/servicios-
 export default function ServiciosMedicosScreen() {
   return (
     <div className="relative w-full ">
-      <header className="px-12 py-2 ">
+      <header className="px-8 md:px-12 py-2 ">
 
         <Title title="Todos nuestros servicios" />
       </header>

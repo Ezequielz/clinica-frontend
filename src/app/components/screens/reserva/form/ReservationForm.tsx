@@ -29,7 +29,7 @@ export const ReservationForm = ({ servicioMedico }: Props) => {
     return (
         <div className={
             clsx(
-                "w-1/2 p-4 bg-white rounded-lg shadow-md",
+                "w-full sm:w-1/2 p-4 bg-white rounded-lg shadow-md",
                 {
                     "hidden": selectedDate && selectedHorario && selectedMedico?.id_medico
                 }

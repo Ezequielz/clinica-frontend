@@ -16,9 +16,9 @@ export const InfoBannerCard = ({ icon, label, from = 0, to }: Props) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
     return (
-        <article ref={ref} className=' px-5 w-fit '>
+        <article ref={ref} className=' md:px-5 w-fit '>
 
-            <div className='flex flex-col gap-1 items-center '>
+            <div className='flex flex-col gap-1  '>
 
                 <div className='flex gap-2 items-center'>
 
@@ -30,13 +30,13 @@ export const InfoBannerCard = ({ icon, label, from = 0, to }: Props) => {
                             separator=","
                             direction="up"
                             duration={1}
-                            className="count-up-text text-6xl"
+                            className="count-up-text text-2xl md:text-6xl"
                         />
                     ) : (
-                        <span className="text-6xl">{from}</span>
+                        <span className="text-xl md:text-6xl">{from}</span>
                     )}
                 </div>
-                <span className='text-balance text-xl'>
+                <span className='text-balance text-sm md:text-xl'>
                     {label}
                 </span>
             </div>

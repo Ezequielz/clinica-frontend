@@ -33,7 +33,7 @@ export default async function reservaScreen({ params }: Props) {
 
     return (
         <div>
-            <header className="px-12 py-2 ">
+            <header className="px-8 md:px-12 py-2 ">
 
                 <Title title={`Reserva de turno para ${serviceMedical?.nombre}`} />
             </header>

@@ -12,13 +12,15 @@ export default function ConsultasPage() {
     };
 
     return (
-        <section className="min-h-screen px-20">
+        <section className="min-h-screen px-5 md:px-20">
 
             <Title title="Mis Consultas" />
 
-            <Suspense fallback={<SkeletonConsultas /> } >
+
+            <Suspense fallback={<SkeletonConsultas />} >
                 <Consultas />
             </Suspense>
+
 
         </section>
     )

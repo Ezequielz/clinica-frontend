@@ -42,7 +42,7 @@ export const OrderById = async ({ id }: Props) => {
             <OrderDetails order={order} />
 
             {/* Summary - Resumen de orden */}
-            <section className="bg-white rounded-xl shadow-xl p-7">
+            <section className="bg-white rounded-xl shadow-xl md:p-7">
              
 
                 <OrderSummary order={order} />

@@ -20,7 +20,7 @@ export const PaqueteByCode = ({ paquete }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full py-5 px-6 md:px-20 flex flex-col md:flex-row gap-6 md:gap-10 items-center"
+            className="w-full py-5 px-6 md:px-20 flex flex-col md:flex-row gap-6 md:gap-10 items-start"
         >
             {/* Imagen del servicio */}
             <motion.div
@@ -119,11 +119,14 @@ export const PaqueteByCode = ({ paquete }: Props) => {
 
                         </strong>
                     </div>
-                    <Link
-                        href={`/reserva/paquete/${paquete.codigo_paquete}`}
-                    >
-                        <ButtonDefault label='Reservar turno'/>
-                    </Link>
+                    <div className='mt-4 flex justify-end md:justify-start'>
+
+                        <Link
+                            href={`/reserva/paquete/${paquete.codigo_paquete}`}
+                        >
+                            <ButtonDefault label='Reservar turno' />
+                        </Link>
+                    </div>
                 </div>
 
 
